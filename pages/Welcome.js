@@ -1,8 +1,16 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import Swiper from "react-native-swiper";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const renderWelcomePage = (imageSource, title, paragraph) => (
+const RenderWelcomePage = (imageSource, title, paragraph) => (
   <View style={styles.slide}>
     <Image source={imageSource} style={styles.image} />
     <Text style={styles.title}>{title}</Text>
@@ -11,67 +19,99 @@ const renderWelcomePage = (imageSource, title, paragraph) => (
 );
 
 const Welcome = ({ navigation }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLastSlide, setIsLastSlide] = useState(false);
 
   const handleSkip = () => {
-    if (currentIndex < 2) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      navigation.navigate("Main");
+    navigation.navigate("Auth");
+  };
+
+  const swiperRef = useRef(null);
+  const next = () => {
+    if (!!swiperRef) {
+      swiperRef.current.scrollBy(1);
     }
   };
 
-  const handleNext = () => {
-    if (currentIndex < 2) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      navigation.navigate("Main");
-    }
+  const onIndexChanged = (index) => {
+    console.log("Current Slide Index:", index);
   };
 
-  // const renderWelcomePage = (imageSource, title, paragraph) => (
-  //   <View style={styles.slide}>
-  //     <Image source={imageSource} style={styles.image} />
-  //     <Text style={styles.title}>{title}</Text>
-  //     <Text style={styles.paragraph}>{paragraph}</Text>
-  //   </View>
-  // );
+  const onMomentumScrollEnd = (e, state, context) => {
+    const lastIndex = state.total - 1;
+    const currentIndex = state.index;
+    if (!state.loop && currentIndex === lastIndex) {
+      setIsLastSlide(true);
+    }
+  };
 
   return (
     <>
-      <Swiper
-        style={styles.container}
-        loop={false}
-        // showsButtons={false}
-        // showsPagination={false}
-        index={currentIndex}
+      <ImageBackground
+        source={require("../assets/welcome/bg.png")}
+        style={{ width: "100%", height: "100%" }}
       >
-        {renderWelcomePage(
-          require("../assets/welcome.jpg"),
-          "Welcome to Page 1",
-          "This is the first page."
-        )}
-        {renderWelcomePage(
-          require("../assets/welcome.jpg"),
-          "Welcome to Page 2",
-          "This is the second page."
-        )}
-        {renderWelcomePage(
-          require("../assets/welcome.jpg"),
-          "Welcome to Page 3",
-          "This is the last page."
-        )}
-      </Swiper>
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleSkip}>
-          <Text style={styles.buttonText}>Skip</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleNext}>
-          <Text style={styles.buttonText}>
-            {currentIndex < 2 ? "Next" : "Get Started"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.container}>
+          <Swiper
+            loop={false}
+            showsButtons={false}
+            showsPagination={false}
+            // index={currentIndex}
+            ref={swiperRef}
+            scrollEnabled={false}
+            onIndexChanged={onIndexChanged}
+            onMomentumScrollEnd={onMomentumScrollEnd}
+            // scrollEnabled={false}
+          >
+            {RenderWelcomePage(
+              require("../assets/welcome/slide1.png"),
+              "Welcome to NFLUENCER",
+              "Discover a new way to monetize your skills and digital assets with our platform."
+            )}
+            {RenderWelcomePage(
+              require("../assets/welcome/slide2.png"),
+              "Create and Sell Gigs",
+              "Offer your services to a wider audience and monetize your expertise through customizable gigs."
+            )}
+            {RenderWelcomePage(
+              require("../assets/welcome/slide4.png"),
+              "Unlock NFT Rewards",
+              "Enhance your gigs with unique NFT rewards, creating an additional revenue stream for your offerings."
+            )}
+            {RenderWelcomePage(
+              require("../assets/welcome/slide3.png"),
+              "Get Started",
+              "Ignite your creative journey and elevate your digital presence with NFLUENCER. Begin today!"
+            )}
+          </Swiper>
+
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
+              <Text style={styles.skipButtonText}>Skip</Text>
+            </TouchableOpacity>
+
+            {isLastSlide ? (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => handleSkip()}
+              >
+                <MaterialIcons
+                  name="keyboard-arrow-right"
+                  size={24}
+                  style={styles.nextButton}
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.button} onPress={() => next()}>
+                <MaterialIcons
+                  name="keyboard-arrow-right"
+                  size={24}
+                  style={styles.nextButton}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+      </ImageBackground>
     </>
   );
 };
@@ -79,60 +119,56 @@ const Welcome = ({ navigation }) => {
 export default Welcome;
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    paddingTop: 0,
+  },
   image: {
-    width: 300,
-    height: 300,
     resizeMode: "contain",
   },
-  slide1: {
-    flex: 1,
-    justifyContent: "center",
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#9DD6EB",
+    zIndex: 100,
+    gap: 20,
+    width: "100%",
+    padding: 40,
+    paddingTop: 0,
+  },
+  skipButtonText: {
+    color: "#fff",
+    fontSize: 15,
+  },
+  nextButton: {
+    color: "#574bef",
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 100,
   },
   slide: {
-    // flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
-  },
-  slide2: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#97CAE5",
-  },
-  slide3: {
-    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#92BBD9",
+    width: "100%",
+    height: "100%",
   },
-  text: {
+  title: {
     color: "#fff",
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "bold",
-  },
-  buttonsContainer: {
-    // flexDirection: "row",
-    // justifyContent: "space-between",
-    paddingHorizontal: 20,
-    marginBottom: 40,
-    zIndex: 100,
-  },
-  button: {
-    zIndex: 100,
-    backgroundColor: "#E11A38",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    width: "45%",
-    shadowRadius: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
     textAlign: "center",
-    fontWeight: "700",
+    marginVertical: 20,
+    width: "95%",
+  },
+  paragraph: {
+    color: "#fff",
+    fontSize: 15,
+    textAlign: "center",
+    width: "80%",
   },
 });
