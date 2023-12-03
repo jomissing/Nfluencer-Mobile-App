@@ -22,7 +22,7 @@ const Welcome = ({ navigation }) => {
   const [isLastSlide, setIsLastSlide] = useState(false);
 
   const handleSkip = () => {
-    navigation.navigate("Auth");
+    navigation.navigate("SignUp");
   };
 
   const swiperRef = useRef(null);

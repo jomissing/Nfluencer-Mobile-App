@@ -15,7 +15,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/animation.gif",
+        "foregroundImage": "./assets/splash.png",
         "backgroundColor": "#fff"
       },
       "package": "com.joharkhan051.MovieLand",
