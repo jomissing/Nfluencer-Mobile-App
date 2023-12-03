@@ -4,7 +4,7 @@
     "slug": "Nfluencer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#574bef"
@@ -15,14 +15,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#fff"
       },
       "package": "com.joharkhan051.MovieLand",
       "versionCode": 3
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo.png"
     },
     "extra": {
       "API_KEY": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTUyYzMxODYxYmRmMjYwMzc1YzU3ZDcxODIzOTQ2YyIsInN1YiI6IjY0YTEzNWFmNGE1MmY4MDBhZjEyODUzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k88OvyPmHTMWF39nx0vFA3y79Oy0Kq4_qu8q8afxS10",

@@ -11,7 +11,7 @@ import {
 // import {ArrowLeftIcon} from 'react-native-heroicons/solid';
 import { Feather } from "@expo/vector-icons";
 
-export default function SignUp({ navigation }) {
+export default function UserDetails({ navigation }) {
   return (
     <ScrollView
       className="h-full w-full flex-1 bg-white"
@@ -20,13 +20,11 @@ export default function SignUp({ navigation }) {
       <View className="flex-1 w-full h-full justify-center">
         <View className="flex flex-col items-center gap-5 p-8 w-full h-full justify-center">
           <View className="text-center flex items-center">
-            <Image
-              source={require("../assets/logo.png")}
-              className="w-20 h-20"
-            />
-            <Text className="text-3xl font-black text-gray-800">Register</Text>
+            <Text className="text-3xl font-black text-gray-800">
+              Submit Your Details
+            </Text>
             <Text className="text-sm text-gray-500 font-semibold">
-              Create your account.
+              Please enter your details.
             </Text>
           </View>
 
@@ -41,54 +39,42 @@ export default function SignUp({ navigation }) {
             </View>
 
             <View className="w-full bg-gray-100 p-2 px-4 rounded-xl mb-4">
-              <Text className="text-gray-400 text-xs">Email</Text>
+              <Text className="text-gray-400 text-xs">Username</Text>
               <TextInput
                 className=" placeholder:text-gray-400 text-gray-800 text-base font-semibold"
-                placeholder="johndoe@example.com"
+                placeholder="johndoe123"
                 placeholderTextColor="rgb(156 163 175)"
               />
             </View>
 
             <View className="w-full bg-gray-100 p-2 px-4 rounded-xl mb-4">
-              <Text className="text-gray-400 text-xs">Password</Text>
+              <Text className="text-gray-400 text-xs">Languages</Text>
               <TextInput
-                secureTextEntry={true}
-                textContentType={"password"}
                 className=" placeholder:text-gray-400 text-gray-800 text-base font-semibold"
-                placeholder="pass1234"
+                placeholder="English, Spanish, French"
                 placeholderTextColor="rgb(156 163 175)"
               />
-              <View className="absolute right-4 top-5 bg-gray-100">
-                <Feather name="eye" size={24} color="rgb(156 163 175)" />
-              </View>
+            </View>
+
+            <View className="w-full bg-gray-100 p-2 px-4 rounded-xl mb-4">
+              <Text className="text-gray-400 text-xs">Bio</Text>
+              <TextInput
+                className=" placeholder:text-gray-400 text-gray-800 text-base font-semibold"
+                placeholder="I am a developer from the United States..."
+                placeholderTextColor="rgb(156 163 175)"
+                multiline={true}
+                numberOfLines={5}
+                textAlignVertical="top"
+              />
             </View>
 
             <View className="w-full mb-3">
               <TouchableOpacity
                 className="flex items-center justify-center bg-nft-primary-light rounded-xl p-4"
-                onPress={() => navigation.navigate("EmailConfirmation")}
+                onPress={() => navigation.navigate("UserDetails")}
               >
                 <Text className="text-white text-lg font-semibold">
-                  Register
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View className="w-3/4 mx-auto">
-              <Text className="text-gray-400 text-xs text-center">
-                By signing up, you agree to our Terms of Service and Privacy
-                Policy.
-              </Text>
-            </View>
-
-            <View className="flex-row justify-center mt-7">
-              <Text className="text-sm text-gray-500 font-semibold">
-                Already have an account?
-              </Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text className="font-semibold text-nft-primary-light">
-                  {" "}
-                  Login
+                  Continue
                 </Text>
               </TouchableOpacity>
             </View>

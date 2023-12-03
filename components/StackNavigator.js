@@ -8,6 +8,9 @@ import MovieDetails from "../pages/MovieDetails";
 import Watch from "../pages/Watch";
 import All from "../pages/All";
 import SignUp from "../pages/SignUp";
+import Login from "../pages/Login";
+import UserDetails from "../pages/UserDetails";
+import EmailConfirmation from "../pages/EmailConfirmation";
 
 const Stack = createStackNavigator();
 
@@ -54,6 +57,9 @@ const StackNavigator = () => {
         <Stack.Screen name="Watch" component={Watch} />
         <Stack.Screen name="All" component={All} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="UserDetails" component={UserDetails} />
+        <Stack.Screen name="EmailConfirmation" component={EmailConfirmation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
