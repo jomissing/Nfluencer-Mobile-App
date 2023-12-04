@@ -197,6 +197,26 @@ export default function Marketplace({ navigation }) {
       ],
     },
   ];
+  const topSellers = [
+    {
+      name: "Usama MK",
+      totalItems: 10,
+      totalEarnings: 0.49,
+      image: require("../assets/nfts/creator.jpg"),
+    },
+    {
+      name: "John Doe",
+      totalItems: 10,
+      totalEarnings: 0.49,
+      image: require("../assets/nfts/art.webp"),
+    },
+    {
+      name: "Rohit Sharma",
+      totalItems: 10,
+      totalEarnings: 0.49,
+      image: require("../assets/nfts/memberships.webp"),
+    },
+  ];
 
   return (
     <View className="flex-1 bg-white pt-7 pb-5">
@@ -275,11 +295,11 @@ export default function Marketplace({ navigation }) {
                   className="rounded-xl shadow-xl bg-white"
                   style={{
                     backgroundColor: "#fff",
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 2 },
+                    shadowColor: "#999",
+                    shadowOffset: { width: 10, height: 2 },
                     shadowOpacity: 0.3,
                     shadowRadius: 4,
-                    elevation: 4,
+                    elevation: 10,
                   }}
                 >
                   <View className="relative">
@@ -307,6 +327,7 @@ export default function Marketplace({ navigation }) {
                       {nft.ownershipHistory.map((owner, index) => (
                         <Image
                           source={owner.image}
+                          key={index}
                           className="w-10 h-10 rounded-full border"
                           style={{ borderWidth: 2, borderColor: "white" }}
                         />
@@ -410,96 +431,149 @@ export default function Marketplace({ navigation }) {
         </View>
 
         <View className="flex flex-col gap-y-3 mt-4 mb-4 mx-0.5">
-          <View
-            className="flex justify-between items-center flex-row py-5 rounded-xl px-1"
-            style={{
-              backgroundColor: "#fff",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.3,
-              shadowRadius: 4,
-              elevation: 4,
-            }}
-          >
-            <View className="flex items-center flex-row gap-2">
-              <Text className="font-bold text-gray-800">1</Text>
-              <Image
-                source={require("../assets/nfts/art.webp")}
-                className="w-12 h-12 rounded-full"
-              />
-              <View className="flex flex-col items-center justify-start">
-                <Text className="text-left w-full font-bold text-lg text-gray-800">
-                  @username
-                </Text>
-                <Text className="text-left w-full font-normal text-xs">
-                  Total Items: 10
-                </Text>
-              </View>
-            </View>
-
-            <View className="flex flex-row">
-              <View>
+          {topSellers.map((seller, index) => (
+            <View
+              className="flex justify-between items-center flex-row py-5 rounded-xl px-3"
+              style={{
+                backgroundColor: "#fff",
+                shadowColor: "#999",
+                shadowOffset: { width: 10, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+                elevation: 10,
+              }}
+            >
+              <View className="flex items-center flex-row gap-2">
                 <Image
-                  source={require("../assets/nfts/eth.png")}
-                  className="w-7 h-7"
-                  resizeMode="contain"
+                  source={seller.image}
+                  className="w-12 h-12 rounded-full"
                 />
+                <View className="flex flex-col items-center justify-start">
+                  <Text className="text-left w-full font-bold text-lg text-gray-800">
+                    {seller.name}
+                  </Text>
+                  <Text className="text-left w-full font-normal text-xs text-gray-500">
+                    Total Items: {seller.totalItems}
+                  </Text>
+                </View>
               </View>
 
-              <View className="flex flex-col justify-start">
-                <Text className="text-xl font-bold">45.6 ETH</Text>
-                <Text className="text-left w-full font-normal text-xs">
-                  $5000
-                </Text>
+              <View className="flex flex-row">
+                <View>
+                  <Image
+                    source={require("../assets/nfts/eth.png")}
+                    className="w-7 h-7"
+                    resizeMode="contain"
+                  />
+                </View>
+
+                <View className="flex flex-col justify-start">
+                  <Text className="text-xl font-bold">
+                    {seller.totalEarnings} ETH
+                  </Text>
+                  <Text className="text-left w-full font-normal text-xs text-gray-500">
+                    $5000
+                  </Text>
+                </View>
               </View>
             </View>
-          </View>
-
-          <View
-            className="flex justify-between items-center flex-row py-5 rounded-xl px-1"
-            style={{
-              backgroundColor: "#fff",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.3,
-              shadowRadius: 4,
-              elevation: 4,
-            }}
-          >
-            <View className="flex items-center flex-row gap-2">
-              <Text className="font-bold text-gray-800">1</Text>
-              <Image
-                source={require("../assets/nfts/creator.jpg")}
-                className="w-12 h-12 rounded-full"
-              />
-              <View className="flex flex-col items-center justify-start">
-                <Text className="text-left w-full font-bold text-lg text-gray-800">
-                  @username
-                </Text>
-                <Text className="text-left w-full font-normal text-xs">
-                  Total Items: 10
-                </Text>
-              </View>
-            </View>
-
-            <View className="flex flex-row">
-              <View>
-                <Image
-                  source={require("../assets/nfts/eth.png")}
-                  className="w-7 h-7"
-                  resizeMode="contain"
-                />
-              </View>
-
-              <View className="flex flex-col justify-start">
-                <Text className="text-xl font-bold">45.6 ETH</Text>
-                <Text className="text-left w-full font-normal text-xs">
-                  $5000
-                </Text>
-              </View>
-            </View>
-          </View>
+          ))}
         </View>
+
+        <View className="flex-1 justify-between items-center flex-row w-full mt-10">
+          <Text className="text-xl font-bold text-gray-800 flex-1">
+            Collections
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => console.log("Options pressed")}
+            className="flex flex-row gap-1 items-center"
+          >
+            <Text className="font-semibold underline">See all</Text>
+            <AntDesign name="right" size={20} color="#333" />
+          </TouchableOpacity>
+        </View>
+
+        <ScrollView
+          className="flex-1 bg-white pt-5"
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          <View className="flex-1 items-center gap-2 justify-start flex-row overflow-auto p-3 pl-1 pt-0">
+            <View className="w-72 m-3">
+              <View
+                className="rounded-xl shadow-xl bg-white"
+                style={{
+                  backgroundColor: "#fff",
+                  shadowColor: "#999",
+                  shadowOffset: { width: 10, height: 2 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 4,
+                  elevation: 10,
+                }}
+              >
+                <View className="relative">
+                  <Image
+                    source={require("../assets/nfts/creator.jpg")}
+                    className="w-full object-cover h-56 rounded-t-2xl"
+                  />
+                  <TouchableOpacity
+                    onPress={() => console.log("Options pressed")}
+                    className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
+                  >
+                    <AntDesign name="heart" size={14} color="rgb(120,82,243)" />
+                    <Text className="text-nft-primary-light ml-1 font-bold text-sm">
+                      10
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View className="-mt-8 px-3 flex justify-between items-center flex-row">
+                  <Image
+                    source={require("../assets/nfts/pfps.webp")}
+                    className="w-14 h-14 rounded-full border"
+                    style={{ borderWidth: 2, borderColor: "white" }}
+                  />
+                </View>
+
+                <View className="p-3 pt-1">
+                  <Text className="mb-2 font-medium text-lg text-gray-800">
+                    Bored Ape Yacht Club
+                  </Text>
+
+                  <View className="flex justify-between flex-row items-center">
+                    <View className="flex flex-col justify-center items-center">
+                      <Text className="text-gray-500 font-normal text-xs w-full text-center">
+                        Total Items
+                      </Text>
+                      <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                        10
+                      </Text>
+                    </View>
+
+                    <View className="flex flex-col justify-center items-center">
+                      <Text className="text-gray-500 font-normal text-xs w-full text-center">
+                        Items Sold
+                      </Text>
+                      <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                        34
+                      </Text>
+                    </View>
+
+                    <View className="flex flex-col justify-center items-center">
+                      <Text className="text-gray-500 font-normal text-xs w-full text-center">
+                        Total Sales
+                      </Text>
+                      <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                        0.49 ETH
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
       </ScrollView>
     </View>
   );
