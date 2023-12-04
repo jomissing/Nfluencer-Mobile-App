@@ -199,7 +199,7 @@ export default function Marketplace({ navigation }) {
   ];
 
   return (
-    <View className="flex-1 bg-white pt-7">
+    <View className="flex-1 bg-white pt-7 pb-5">
       {/* Top Bar */}
       <View className="flex-row justify-between items-center p-4">
         <View className="flex-1 flex-row items-center justify-start">
@@ -215,7 +215,7 @@ export default function Marketplace({ navigation }) {
         </View>
       </View>
 
-      <ScrollView className="px-4">
+      <ScrollView className="px-3">
         {/* Chat Area */}
         <ScrollView
           className="flex-1 bg-white pt-5"
@@ -408,9 +408,99 @@ export default function Marketplace({ navigation }) {
             <AntDesign name="right" size={20} color="#333" />
           </TouchableOpacity>
         </View>
-      </ScrollView>
 
-      <View></View>
+        <View className="flex flex-col gap-y-3 mt-4 mb-4 mx-0.5">
+          <View
+            className="flex justify-between items-center flex-row py-5 rounded-xl px-1"
+            style={{
+              backgroundColor: "#fff",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.3,
+              shadowRadius: 4,
+              elevation: 4,
+            }}
+          >
+            <View className="flex items-center flex-row gap-2">
+              <Text className="font-bold text-gray-800">1</Text>
+              <Image
+                source={require("../assets/nfts/art.webp")}
+                className="w-12 h-12 rounded-full"
+              />
+              <View className="flex flex-col items-center justify-start">
+                <Text className="text-left w-full font-bold text-lg text-gray-800">
+                  @username
+                </Text>
+                <Text className="text-left w-full font-normal text-xs">
+                  Total Items: 10
+                </Text>
+              </View>
+            </View>
+
+            <View className="flex flex-row">
+              <View>
+                <Image
+                  source={require("../assets/nfts/eth.png")}
+                  className="w-7 h-7"
+                  resizeMode="contain"
+                />
+              </View>
+
+              <View className="flex flex-col justify-start">
+                <Text className="text-xl font-bold">45.6 ETH</Text>
+                <Text className="text-left w-full font-normal text-xs">
+                  $5000
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          <View
+            className="flex justify-between items-center flex-row py-5 rounded-xl px-1"
+            style={{
+              backgroundColor: "#fff",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.3,
+              shadowRadius: 4,
+              elevation: 4,
+            }}
+          >
+            <View className="flex items-center flex-row gap-2">
+              <Text className="font-bold text-gray-800">1</Text>
+              <Image
+                source={require("../assets/nfts/creator.jpg")}
+                className="w-12 h-12 rounded-full"
+              />
+              <View className="flex flex-col items-center justify-start">
+                <Text className="text-left w-full font-bold text-lg text-gray-800">
+                  @username
+                </Text>
+                <Text className="text-left w-full font-normal text-xs">
+                  Total Items: 10
+                </Text>
+              </View>
+            </View>
+
+            <View className="flex flex-row">
+              <View>
+                <Image
+                  source={require("../assets/nfts/eth.png")}
+                  className="w-7 h-7"
+                  resizeMode="contain"
+                />
+              </View>
+
+              <View className="flex flex-col justify-start">
+                <Text className="text-xl font-bold">45.6 ETH</Text>
+                <Text className="text-left w-full font-normal text-xs">
+                  $5000
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
