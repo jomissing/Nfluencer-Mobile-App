@@ -192,7 +192,7 @@ export default function SearchMarketplace({ navigation }) {
   ];
 
   return (
-    <View className="flex-1 bg-white pt-7 pb-7">
+    <View className="flex-1 bg-white pt-7 pb-0">
       {/* Top Bar */}
       <View className="flex-col p-4">
         <View className="flex-row items-center justify-start gap-4">
