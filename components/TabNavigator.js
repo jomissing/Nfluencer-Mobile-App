@@ -1,11 +1,10 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../pages/Home";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import Settings from "../pages/Settings";
 import Search from "../pages/Search";
-import Bookmarks from "../pages/Bookmarks";
+import Inbox from "../pages/Inbox";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,25 +15,26 @@ const TabNavigator = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          paddingHorizontal: 10,
-          paddingTop: 13,
-          paddingBottom: 13,
-          backgroundColor: "#000",
-          height: 70,
+          paddingHorizontal: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          backgroundColor: "#fff",
+          height: 50,
           margin: 0,
           borderTopWidth: 0,
         },
         tabBarItemStyle: {
-          borderRadius: 100,
+          borderRadius: 0,
         },
         tabBarLabelStyle: {
           padding: 0,
           // display: "none",
         },
         // tabBarLabel: "",
-        tabBarActiveBackgroundColor: "#E11A38",
-        tabBarActiveTintColor: "#DDD",
+        tabBarActiveBackgroundColor: "rgba(226,221,251,0.3)",
+        tabBarActiveTintColor: "rgb(120,82,243)",
         tabBarInactiveTintColor: "#7D7C7B",
+        tabBarShowLabel: false,
       }}
     >
       <Tab.Screen
@@ -56,11 +56,15 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Saved"
-        component={Bookmarks}
+        name="Inbox"
+        component={Inbox}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="bookmark" size={size} color={color} />
+            <MaterialCommunityIcons
+              name="email-outline"
+              size={size}
+              color={color}
+            />
           ),
         }}
       />

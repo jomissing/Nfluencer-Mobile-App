@@ -71,7 +71,7 @@ export default function UserDetails({ navigation }) {
             <View className="w-full mb-3">
               <TouchableOpacity
                 className="flex items-center justify-center bg-nft-primary-light rounded-xl p-4"
-                onPress={() => navigation.navigate("UserDetails")}
+                onPress={() => navigation.navigate("Main")}
               >
                 <Text className="text-white text-lg font-semibold">
                   Continue

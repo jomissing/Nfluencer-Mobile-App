@@ -11,6 +11,7 @@ import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import UserDetails from "../pages/UserDetails";
 import EmailConfirmation from "../pages/EmailConfirmation";
+import Inbox from "../pages/Inbox";
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="UserDetails" component={UserDetails} />
         <Stack.Screen name="EmailConfirmation" component={EmailConfirmation} />
+        <Stack.Screen name="Inbox" component={Inbox} />
       </Stack.Navigator>
     </NavigationContainer>
   );
