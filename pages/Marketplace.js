@@ -45,20 +45,6 @@ export default function Marketplace() {
     },
   ];
 
-  // const featuredNFTs = [
-  //   {
-  //     name: "",
-  //     price: 0,
-  //     image: "",
-  //     category: "",
-  //     collection: {},
-  //     likes: 0,
-  //     creator: {},
-  //     currentOwner: {},
-  //     ownershipHistory: [],
-  //   },
-  // ];
-
   const featuredNFTs = [
     {
       name: "NFT Name Here",
@@ -408,7 +394,10 @@ export default function Marketplace() {
                           Save Item
                         </Text>
                       </TouchableOpacity>
-                      <TouchableOpacity className="flex items-center justify-center bg-nft-primary-light rounded-xl p-2 py-3 flex-1">
+                      <TouchableOpacity
+                        className="flex items-center justify-center bg-nft-primary-light rounded-xl p-2 py-3 flex-1"
+                        onPress={() => navigation.navigate("NFTDetail")}
+                      >
                         <Text className="text-white text-base font-semibold">
                           View Details
                         </Text>

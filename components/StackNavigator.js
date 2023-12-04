@@ -15,6 +15,7 @@ import Inbox from "../pages/Inbox";
 import Chat from "../pages/Chat";
 import Marketplace from "../pages/Marketplace";
 import SearchMarketplace from "../pages/SearchMarketplace";
+import NFTDetail from "../pages/NFTDetail";
 
 const Stack = createStackNavigator();
 
@@ -68,6 +69,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Marketplace" component={Marketplace} />
         <Stack.Screen name="SearchMarketplace" component={SearchMarketplace} />
+        <Stack.Screen name="NFTDetail" component={NFTDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
