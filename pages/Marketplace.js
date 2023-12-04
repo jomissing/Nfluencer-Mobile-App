@@ -229,7 +229,9 @@ export default function Marketplace({ navigation }) {
         </View>
 
         <View>
-          <TouchableOpacity onPress={() => console.log("Options pressed")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SearchMarketplace")}
+          >
             <AntDesign name="search1" size={24} color="#333" />
           </TouchableOpacity>
         </View>
@@ -433,6 +435,7 @@ export default function Marketplace({ navigation }) {
         <View className="flex flex-col gap-y-3 mt-4 mb-4 mx-0.5">
           {topSellers.map((seller, index) => (
             <View
+              key={index}
               className="flex justify-between items-center flex-row py-5 rounded-xl px-3"
               style={{
                 backgroundColor: "#fff",
