@@ -1,10 +1,17 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../pages/Home";
-import { AntDesign, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Feather,
+  MaterialCommunityIcons,
+  FontAwesome5,
+  FontAwesome,
+} from "@expo/vector-icons";
 import Settings from "../pages/Settings";
 import Search from "../pages/Search";
 import Inbox from "../pages/Inbox";
+import Marketplace from "../pages/Marketplace";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,11 +54,11 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={Search}
+        name="Marketplace"
+        component={Marketplace}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="search1" size={size} color={color} />
+            <FontAwesome name="diamond" size={size} color={color} />
           ),
         }}
       />
@@ -62,7 +69,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="email-outline"
-              size={size}
+              size={28}
               color={color}
             />
           ),
