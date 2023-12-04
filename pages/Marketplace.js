@@ -197,6 +197,7 @@ export default function Marketplace({ navigation }) {
       ],
     },
   ];
+
   const topSellers = [
     {
       name: "Usama MK",

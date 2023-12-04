@@ -14,6 +14,8 @@ import {
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Dropdown } from "react-native-element-dropdown";
+import NFTTab from "../components/NFTTab";
+import CollectionTab from "../components/CollectionTab";
 
 export default function SearchMarketplace({ navigation }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -54,16 +56,6 @@ export default function SearchMarketplace({ navigation }) {
     ],
   };
 
-  // const categories = [
-  //   { name: "All" },
-  //   { name: "Art" },
-  //   { name: "Gaming" },
-  //   { name: "Memberships" },
-  //   { name: "PFPs" },
-  //   { name: "Photography" },
-  //   { name: "Music" },
-  // ];
-
   const categories = [
     {
       label: "All",
@@ -98,6 +90,107 @@ export default function SearchMarketplace({ navigation }) {
   const [value, setValue] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
 
+  const [activeTab, setActiveTab] = useState("NFTs");
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const NFTs = [
+    {
+      name: "NFT Name Here",
+      price: 0.49,
+      image: require("../assets/nfts/nft1.webp"),
+      category: "Gaming",
+      collection: {
+        name: "Mutants",
+        items: 10,
+      },
+      likes: 0,
+      creator: {
+        name: "John",
+        username: "@johndoe",
+        address: "0x00...uj09",
+        image: require("../assets/nfts/creator.jpg"),
+      },
+      currentOwner: {
+        name: "Owner",
+        username: "@Owner",
+        address: "0x00...uj09",
+        // image: require("../assets/nfts/owner.jpg"),
+      },
+      ownershipHistory: [
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/art.webp"),
+          date: "12/12/2021",
+        },
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/music.webp"),
+          date: "12/12/2021",
+        },
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/pfps.webp"),
+          date: "12/12/2021",
+        },
+      ],
+    },
+    {
+      name: "NFT Name Here",
+      price: 0.49,
+      image: require("../assets/nfts/creator.jpg"),
+      category: "Gaming",
+      collection: {
+        name: "Mutants",
+        items: 10,
+      },
+      likes: 0,
+      creator: {
+        name: "John",
+        username: "@johndoe",
+        address: "0x00...uj09",
+        image: require("../assets/nfts/creator.jpg"),
+      },
+      currentOwner: {
+        name: "Owner",
+        username: "@Owner",
+        address: "0x00...uj09",
+        // image: require("../assets/nfts/owner.jpg"),
+      },
+      ownershipHistory: [
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/art.webp"),
+          date: "12/12/2021",
+        },
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/music.webp"),
+          date: "12/12/2021",
+        },
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/pfps.webp"),
+          date: "12/12/2021",
+        },
+      ],
+    },
+  ];
+
   return (
     <View className="flex-1 bg-white pt-7 pb-7">
       {/* Top Bar */}
@@ -112,23 +205,54 @@ export default function SearchMarketplace({ navigation }) {
         </View>
 
         <View className="flex flex-row items-center gap-3 mt-1">
+          <View className="flex-1 relative">
+            <TextInput
+              className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
+              placeholder="Search..."
+              placeholderTextColor="rgb(156 163 175)"
+            />
+            <View className="absolute top-3.5 right-2 block">
+              <AntDesign
+                name="search1"
+                size={24}
+                color="border-color: rgb(209 213 219)"
+              />
+            </View>
+          </View>
           <TouchableOpacity
             onPress={isSidebarOpen ? closeSidebar : openSidebar}
             className="bg-gray-100 p-4 rounded-xl"
           >
             <Ionicons name="filter-outline" size={24} color="#333" />
           </TouchableOpacity>
+        </View>
 
-          <View className="flex-1 relative">
-            <TextInput
-              className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-400 rounded-xl"
-              placeholder="Search..."
-              placeholderTextColor="rgb(156 163 175)"
-            />
-            <View className="absolute top-3.5 right-2 block">
-              <AntDesign name="search1" size={24} color="rgb(156 163 175)" />
-            </View>
-          </View>
+        <View className="flex flex-row justify-between items-center p-0 mt-3">
+          <TouchableOpacity
+            className="text-center flex-1 items-center"
+            onPress={() => handleTabChange("NFTs")}
+          >
+            <Text
+              className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
+                activeTab === "NFTs" && " border-gray-800 text-gray-800"
+              }`}
+            >
+              NFTs
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="text-center flex-1 items-center"
+            onPress={() => handleTabChange("Collections")}
+          >
+            <Text
+              className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
+                activeTab === "Collections" && " border-gray-800 text-gray-800"
+              }`}
+            >
+              Collections
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -238,7 +362,7 @@ export default function SearchMarketplace({ navigation }) {
                   <View className="relative flex-1">
                     <TextInput
                       type="number"
-                      className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
+                      className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
                       placeholder="Min"
                       min={0}
                     />
@@ -249,11 +373,37 @@ export default function SearchMarketplace({ navigation }) {
                   <View className="relative flex-1">
                     <TextInput
                       type="number"
-                      className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
+                      className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
                       placeholder="Max"
                       min={0}
                     />
                   </View>
+                </View>
+              </View>
+
+              <View>
+                <View className="mb-3">
+                  <Text className="font-semibold text-base text-gray-800">
+                    Media Type
+                  </Text>
+                </View>
+
+                <View className="flex gap-2 items-center justify-between flex-row">
+                  <TouchableOpacity type="number" className="flex-1">
+                    <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                      All
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity type="number" className="flex-1">
+                    <Text className="text-white text-center font-medium p-3.5 border-nft-primary-light bg-nft-primary-light border-2 rounded-xl">
+                      Image
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity type="number" className="flex-1">
+                    <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                      Video
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -261,7 +411,9 @@ export default function SearchMarketplace({ navigation }) {
         </View>
       </Animated.ScrollView>
 
-      <ScrollView className="px-3"></ScrollView>
+      <ScrollView className="px-3">
+        {activeTab === "NFTs" ? <NFTTab /> : <CollectionTab />}
+      </ScrollView>
     </View>
   );
 }
