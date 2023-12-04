@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const usersData = [
   {
@@ -54,7 +55,8 @@ const usersData = [
   },
 ];
 
-export default function Inbox({ navigation }) {
+export default function Inbox() {
+  const navigation = useNavigation();
   return (
     <View className="flex-1 bg-white pt-7">
       {/* Top Bar */}

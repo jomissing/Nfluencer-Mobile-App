@@ -10,8 +10,10 @@ import {
 } from "react-native";
 // import {ArrowLeftIcon} from 'react-native-heroicons/solid';
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Login({ navigation }) {
+export default function Login() {
+  const navigation = useNavigation();
   return (
     <ScrollView
       className="h-full w-full flex-1 bg-white"

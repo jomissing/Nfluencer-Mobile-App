@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const messagesData = [
   {
@@ -132,7 +133,8 @@ const messagesData = [
   // Add more messages as needed
 ];
 
-export default function Chat({ navigation }) {
+export default function Chat() {
+  const navigation = useNavigation();
   return (
     <View className="flex-1 bg-white pt-7">
       {/* Top Bar */}

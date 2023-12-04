@@ -8,8 +8,10 @@ import {
   Image,
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Marketplace({ navigation }) {
+export default function Marketplace() {
+  const navigation = useNavigation();
   const categories = [
     {
       id: 4,

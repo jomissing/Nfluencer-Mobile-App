@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Swiper from "react-native-swiper";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const RenderWelcomePage = (imageSource, title, paragraph) => (
   <View style={styles.slide}>
@@ -18,7 +19,8 @@ const RenderWelcomePage = (imageSource, title, paragraph) => (
   </View>
 );
 
-const Welcome = ({ navigation }) => {
+const Welcome = () => {
+  const navigation = useNavigation();
   const [isLastSlide, setIsLastSlide] = useState(false);
 
   const handleSkip = () => {

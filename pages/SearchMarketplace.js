@@ -16,8 +16,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { Dropdown } from "react-native-element-dropdown";
 import NFTTab from "../components/NFTTab";
 import CollectionTab from "../components/CollectionTab";
+import { useNavigation } from "@react-navigation/native";
 
-export default function SearchMarketplace({ navigation }) {
+export default function SearchMarketplace() {
+  const navigation = useNavigation();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;
 
@@ -196,7 +199,7 @@ export default function SearchMarketplace({ navigation }) {
       {/* Top Bar */}
       <View className="flex-col p-4">
         <View className="flex-row items-center justify-start gap-4">
-          <TouchableOpacity onPress={() => navigation.navigate("Marketplace")}>
+          <TouchableOpacity onPress={() => navigation.goBack("Marketplace")}>
             <AntDesign name="arrowleft" size={24} color="#333" />
           </TouchableOpacity>
           <Text className="text-2xl font-bold text-gray-800">
@@ -253,6 +256,19 @@ export default function SearchMarketplace({ navigation }) {
               Collections
             </Text>
           </TouchableOpacity>
+
+          {/* <TouchableOpacity
+            className="text-center flex-1 items-center"
+            onPress={() => handleTabChange("Collections")}
+          >
+            <Text
+              className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
+                activeTab === "Creators" && " border-gray-800 text-gray-800"
+              }`}
+            >
+              Creators
+            </Text>
+          </TouchableOpacity> */}
         </View>
       </View>
 

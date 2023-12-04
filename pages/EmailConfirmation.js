@@ -7,8 +7,10 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function EmailConfirmation({ navigation }) {
+export default function EmailConfirmation() {
+  const navigation = useNavigation();
   return (
     <ScrollView
       className="h-full w-full flex-1 bg-white"
