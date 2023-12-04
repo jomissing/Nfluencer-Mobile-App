@@ -79,7 +79,7 @@ export default function Inbox({ navigation }) {
         {usersData.map((user) => (
           <TouchableOpacity
             key={user.id}
-            onPress={() => console.log(`User ${user.name} pressed`)}
+            onPress={() => navigation.navigate("Chat")}
             className="flex flex-row items-center border-b border-gray-50 p-4 gap-4 py-4"
           >
             <View className="relative">

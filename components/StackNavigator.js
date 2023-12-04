@@ -12,6 +12,7 @@ import Login from "../pages/Login";
 import UserDetails from "../pages/UserDetails";
 import EmailConfirmation from "../pages/EmailConfirmation";
 import Inbox from "../pages/Inbox";
+import Chat from "../pages/Chat";
 
 const Stack = createStackNavigator();
 
@@ -62,6 +63,7 @@ const StackNavigator = () => {
         <Stack.Screen name="UserDetails" component={UserDetails} />
         <Stack.Screen name="EmailConfirmation" component={EmailConfirmation} />
         <Stack.Screen name="Inbox" component={Inbox} />
+        <Stack.Screen name="Chat" component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   );
