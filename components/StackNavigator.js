@@ -17,6 +17,7 @@ import Marketplace from "../pages/Marketplace";
 import SearchMarketplace from "../pages/SearchMarketplace";
 import NFTDetail from "../pages/NFTDetail";
 import CollectionDetail from "../pages/CollectionDetail";
+import GigDetails from "../pages/GigDetails";
 
 const Stack = createStackNavigator();
 
@@ -78,6 +79,7 @@ const StackNavigator = () => {
               component={SearchMarketplace}
             />
             <Stack.Screen name="NFTDetail" component={NFTDetail} />
+            <Stack.Screen name="GigDetails" component={GigDetails} />
             <Stack.Screen
               name="CollectionDetail"
               component={CollectionDetail}

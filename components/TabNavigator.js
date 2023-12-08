@@ -7,11 +7,15 @@ import {
   MaterialCommunityIcons,
   FontAwesome5,
   FontAwesome,
+  MaterialIcons,
+  Ionicons,
 } from "@expo/vector-icons";
 import Settings from "../pages/Settings";
 import Search from "../pages/Search";
 import Inbox from "../pages/Inbox";
 import Marketplace from "../pages/Marketplace";
+import SearchServices from "../pages/Services";
+import MyGigs from "./MyGigs";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,6 +58,15 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="Services"
+        component={SearchServices}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="design-services" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="Marketplace"
         component={Marketplace}
         options={{
@@ -76,11 +89,11 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Settings"
-        component={Settings}
+        name="MyGigs"
+        component={MyGigs}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="settings" size={size} color={color} />
+            <Ionicons name="briefcase-outline" size={size} color={color} />
           ),
         }}
       />
