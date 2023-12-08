@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import StackNavigator from "./components/StackNavigator";
 import SplashScreen from "./components/SplashScreen";
+import { AuthProvider } from "./pages/redux/AuthContext"; // Adjust the path accordingly
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,9 @@ export default function App() {
           <SplashScreen />
         </>
       ) : (
-        <StackNavigator />
+        <AuthProvider>
+          <StackNavigator />
+        </AuthProvider>
       )}
     </View>
   );

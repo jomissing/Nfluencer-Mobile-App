@@ -11,9 +11,93 @@ import {
 // import {ArrowLeftIcon} from 'react-native-heroicons/solid';
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import { APP_API_URL } from "@env";
+import { useAuth } from "./redux/AuthContext";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { userDetails, setUserDetails, clearUserDetails } = useAuth();
   const navigation = useNavigation();
+
+  // clear all states on unmount
+  useEffect(() => {
+    return () => {
+      setEmail("");
+      setPassword("");
+      setErrorMessage("");
+      setHasError(false);
+      setShowPassword(false);
+      setIsSubmitting(false);
+    };
+  }, []);
+
+  // console.log(userDetails);
+
+  // redirect to main if user is already logged in
+  useEffect(() => {
+    if (userDetails) {
+      navigation.navigate("Main");
+    }
+  }, [userDetails]);
+
+  const handeLogin = async () => {
+    setIsSubmitting(true);
+
+    if (!email || !password) {
+      setHasError(true);
+      setErrorMessage("Please fill in all fields.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // "usamamuhammad@mailsac.com";
+    // setErrorMessage("");
+    // setHasError(false);
+    try {
+      await fetch(`${APP_API_URL}/api/user/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (
+            (data.error && data.emailNotFound) ||
+            (data.error && data.incorrectPassword)
+          ) {
+            setErrorMessage(data.message);
+            return;
+          }
+
+          if (data.error) {
+            setErrorMessage(data.message);
+            return;
+          }
+
+          if (data.token) {
+            setErrorMessage("");
+            setHasError(false);
+            console.log(data);
+            console.log(data.user);
+            setUserDetails(data.user);
+            navigation.navigate("Main");
+          }
+        });
+    } catch (error) {
+      console.log("object", error);
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
     <ScrollView
       className="h-full w-full flex-1 bg-white"
@@ -33,34 +117,80 @@ export default function Login() {
           </View>
 
           <View className="w-full">
-            <View className="w-full bg-gray-100 p-2 px-4 rounded-xl mb-4">
-              <Text className="text-gray-400 text-xs">Email</Text>
+            <View
+              className={`w-full bg-gray-100 p-2 px-4 rounded-xl mb-4 border-2 ${
+                hasError ? "border-red-700" : "border-gray-300"
+              }`}
+            >
+              <Text
+                className={`text-xs ${
+                  hasError ? "text-red-700" : "text-gray-400"
+                }`}
+              >
+                Email
+              </Text>
               <TextInput
                 className=" placeholder:text-gray-400 text-gray-800 text-base font-semibold"
                 placeholder="johndoe@example.com"
                 placeholderTextColor="rgb(156 163 175)"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
               />
             </View>
 
-            <View className="w-full bg-gray-100 p-2 px-4 rounded-xl mb-4">
-              <Text className="text-gray-400 text-xs">Password</Text>
+            <View
+              className={`w-full bg-gray-100 p-2 px-4 rounded-xl mb-4 border-2 ${
+                hasError ? "border-red-700" : "border-gray-300"
+              }`}
+            >
+              <Text
+                className={`text-xs ${
+                  hasError ? "text-red-700" : "text-gray-400"
+                }`}
+              >
+                Password
+              </Text>
               <TextInput
-                secureTextEntry={true}
+                secureTextEntry={!showPassword}
                 textContentType={"password"}
                 className=" placeholder:text-gray-400 text-gray-800 text-base font-semibold"
                 placeholder="pass1234"
                 placeholderTextColor="rgb(156 163 175)"
+                onChangeText={(text) => setPassword(text)}
+                value={password}
               />
-              <View className="absolute right-4 top-5 bg-gray-100">
+              <TouchableOpacity
+                className="absolute right-4 top-5 bg-gray-100"
+                onPress={() => setShowPassword(!showPassword)}
+              >
                 <Feather name="eye" size={24} color="rgb(156 163 175)" />
-              </View>
+              </TouchableOpacity>
             </View>
 
+            {hasError && (
+              <Text className="text-red-700 text-sm mb-2">{errorMessage}</Text>
+            )}
+
             <View className="w-full mb-3">
-              <TouchableOpacity className="flex items-center justify-center bg-nft-primary-light rounded-xl p-4">
-                <Text className="text-white text-lg font-semibold">
-                  Register
-                </Text>
+              <TouchableOpacity
+                className="flex items-center justify-center bg-nft-primary-light rounded-xl p-4"
+                onPress={handeLogin}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <View>
+                    <Text className="text-white text-lg font-semibold">
+                      ...
+                    </Text>
+                  </View>
+                ) : (
+                  <View className="flex flex-row items-center gap-2">
+                    <Text className="text-white text-lg font-semibold">
+                      Login
+                    </Text>
+                    <Feather name="log-in" size={24} color="white" />
+                  </View>
+                )}
               </TouchableOpacity>
             </View>
 
@@ -70,14 +200,14 @@ export default function Login() {
               </Text>
             </View>
 
-            <View className="flex-row justify-center mt-7">
-              <Text className="text-sm text-gray-500 font-semibold">
+            <View className="flex-col justify-center w-full items-center mt-7">
+              <Text className="text-sm text-gray-500 font-semibold block">
                 Don't have an account?
               </Text>
               <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                 <Text className="font-semibold text-nft-primary-light">
                   {" "}
-                  Sign Up
+                  Sign Up on NFLUENCER Website
                 </Text>
               </TouchableOpacity>
             </View>

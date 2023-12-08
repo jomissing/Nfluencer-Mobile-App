@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import Trending from "../components/Trending";
 
 export default function Marketplace() {
   const navigation = useNavigation();
@@ -226,10 +227,12 @@ export default function Marketplace() {
         </View>
       </View>
 
-      <ScrollView className="px-3">
+      <ScrollView>
+        <Trending />
+
         {/* Chat Area */}
         <ScrollView
-          className="flex-1 bg-white pt-5"
+          className="flex-1 bg-white pt-5 px-3"
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
@@ -256,7 +259,7 @@ export default function Marketplace() {
           </View>
         </ScrollView>
 
-        <View className="flex-1 justify-between items-center flex-row w-full mt-10">
+        <View className="flex-1 justify-between items-center flex-row w-full mt-10 px-3">
           <Text className="text-xl font-bold text-gray-800 flex-1">
             Featured
           </Text>
@@ -272,7 +275,7 @@ export default function Marketplace() {
 
         {/* Featured NFTs */}
         <ScrollView
-          className="flex-1 bg-white pt-5"
+          className="flex-1 bg-white pt-5 px-3"
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
@@ -410,7 +413,7 @@ export default function Marketplace() {
           ))}
         </ScrollView>
 
-        <View className="flex-1 justify-between items-center flex-row w-full mt-10">
+        <View className="flex-1 justify-between items-center flex-row w-full mt-10 px-3">
           <Text className="text-xl font-bold text-gray-800 flex-1">
             Top sellers
           </Text>
@@ -424,7 +427,7 @@ export default function Marketplace() {
           </TouchableOpacity>
         </View>
 
-        <View className="flex flex-col gap-y-3 mt-4 mb-4 mx-0.5">
+        <View className="flex flex-col gap-y-3 mt-4 mb-4 mx-0.5 px-3">
           {topSellers.map((seller, index) => (
             <View
               key={index}
@@ -475,7 +478,7 @@ export default function Marketplace() {
           ))}
         </View>
 
-        <View className="flex-1 justify-between items-center flex-row w-full mt-10">
+        <View className="flex-1 justify-between items-center flex-row w-full mt-10 px-3">
           <Text className="text-xl font-bold text-gray-800 flex-1">
             Collections
           </Text>
@@ -490,11 +493,11 @@ export default function Marketplace() {
         </View>
 
         <ScrollView
-          className="flex-1 bg-white pt-5"
+          className="flex-1 bg-white pt-5 px-3"
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-          <View className="flex-1 items-center gap-2 justify-start flex-row overflow-auto p-3 pl-1 pt-0">
+          <View className="flex-1 items-center gap-2 justify-start flex-row overflow-auto p-3 pl-1 pt-0 px-3">
             <View className="w-72 m-3">
               <View
                 className="rounded-xl shadow-xl bg-white"

@@ -1,10 +1,22 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useAuth } from "./redux/AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
 function Settings() {
+  const { userDetails, setUserDetails, clearUserDetails } = useAuth();
+  const navigation = useNavigation();
+
+  const handleLogout = () => {
+    clearUserDetails();
+    navigation.navigate("Login");
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.Text}>Coming Soon.</Text>
+      <TouchableOpacity style={styles.Text} onPress={handleLogout}>
+        <Text className="text-white">Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }

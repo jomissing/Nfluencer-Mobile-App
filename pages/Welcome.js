@@ -19,12 +19,13 @@ const RenderWelcomePage = (imageSource, title, paragraph) => (
   </View>
 );
 
-const Welcome = () => {
+const Welcome = ({ onDismiss }) => {
   const navigation = useNavigation();
   const [isLastSlide, setIsLastSlide] = useState(false);
 
   const handleSkip = () => {
-    navigation.navigate("SignUp");
+    onDismiss();
+    navigation.navigate("Login");
   };
 
   const swiperRef = useRef(null);

@@ -16,6 +16,7 @@ import Chat from "../pages/Chat";
 import Marketplace from "../pages/Marketplace";
 import SearchMarketplace from "../pages/SearchMarketplace";
 import NFTDetail from "../pages/NFTDetail";
+import CollectionDetail from "../pages/CollectionDetail";
 
 const Stack = createStackNavigator();
 
@@ -56,20 +57,33 @@ const StackNavigator = () => {
           <Stack.Screen name="Welcome">
             {(props) => <Welcome {...props} onDismiss={handleWelcomeDismiss} />}
           </Stack.Screen>
-        ) : null}
-        <Stack.Screen name="Main" component={TabNavigator} />
-        <Stack.Screen name="MovieDetails" component={MovieDetails} />
-        <Stack.Screen name="Watch" component={Watch} />
-        <Stack.Screen name="All" component={All} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="UserDetails" component={UserDetails} />
-        <Stack.Screen name="EmailConfirmation" component={EmailConfirmation} />
-        <Stack.Screen name="Inbox" component={Inbox} />
-        <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="Marketplace" component={Marketplace} />
-        <Stack.Screen name="SearchMarketplace" component={SearchMarketplace} />
-        <Stack.Screen name="NFTDetail" component={NFTDetail} />
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Main" component={TabNavigator} />
+            <Stack.Screen name="MovieDetails" component={MovieDetails} />
+            <Stack.Screen name="Watch" component={Watch} />
+            <Stack.Screen name="All" component={All} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="UserDetails" component={UserDetails} />
+            <Stack.Screen
+              name="EmailConfirmation"
+              component={EmailConfirmation}
+            />
+            <Stack.Screen name="Inbox" component={Inbox} />
+            <Stack.Screen name="Chat" component={Chat} />
+            <Stack.Screen name="Marketplace" component={Marketplace} />
+            <Stack.Screen
+              name="SearchMarketplace"
+              component={SearchMarketplace}
+            />
+            <Stack.Screen name="NFTDetail" component={NFTDetail} />
+            <Stack.Screen
+              name="CollectionDetail"
+              component={CollectionDetail}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

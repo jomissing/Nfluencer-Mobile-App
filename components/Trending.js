@@ -79,14 +79,6 @@ const Trending = () => {
           padding: 10,
           borderRadius: 10,
           overflow: "hidden",
-          shadowColor: "#0D1117",
-          elevation: 20,
-          shadowOpacity: 0.5,
-          shadowRadius: 10,
-          shadowOffset: {
-            width: 0,
-            height: 5,
-          },
         }}
       >
         <TouchableOpacity
