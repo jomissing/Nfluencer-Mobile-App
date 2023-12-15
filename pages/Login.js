@@ -16,8 +16,8 @@ import { APP_API_URL } from "@env";
 import { useAuth } from "./redux/AuthContext";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("usamamuhammad@mailsac.com");
+  const [password, setPassword] = useState("usamamuhammad@mailsac.com");
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

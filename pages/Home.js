@@ -86,23 +86,21 @@ function Home() {
   };
 
   const getEarnings = () => {
-    if (ordersAsSeller) {
-      const acceptedOrders = ordersAsSeller.filter(
-        (order) => order.isDeliveryAccepted && order.gig !== null
-      );
-      const earningsByMonth = acceptedOrders.reduce((result, order) => {
-        const month = new Date(order.createdAt).getMonth();
-        result[month] = (result[month] || 0) + order.totalPrice;
-        return result;
-      }, {});
+    const acceptedOrders = ordersAsSeller.filter(
+      (order) => order.isDeliveryAccepted && order.gig !== null
+    );
+    const earningsByMonth = acceptedOrders.reduce((result, order) => {
+      const month = new Date(order.createdAt).getMonth();
+      result[month] = (result[month] || 0) + order.totalPrice;
+      return result;
+    }, {});
 
-      const earnings = Array.from(
-        { length: 12 },
-        (_, index) => earningsByMonth[index] || 0
-      );
+    const earnings = Array.from(
+      { length: 12 },
+      (_, index) => earningsByMonth[index] || 0
+    );
 
-      setearningSeries(earnings);
-    }
+    setearningSeries(earnings);
   };
 
   useEffect(() => {

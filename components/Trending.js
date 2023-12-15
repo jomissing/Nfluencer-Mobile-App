@@ -11,7 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
-
+// socaje9266@wermink.com
 const Trending = () => {
   const flatListRef = React.useRef(null);
   const navigation = useNavigation();
@@ -70,6 +70,30 @@ const Trending = () => {
     }
   };
 
+  const featuredNFTs = [
+    {
+      image: require("../assets/nft25.png"),
+    },
+    {
+      image: require("../assets/nfts/nft1.webp"),
+    },
+    {
+      image: require("../assets/nfts/nft2.jpg"),
+    },
+    {
+      image: require("../assets/nfts/nft5.jpg"),
+    },
+    {
+      image: require("../assets/nfts/nft7.jpeg"),
+    },
+    {
+      image: require("../assets/nfts/creator.jpg"),
+    },
+    {
+      image: require("../assets/nfts/gaming.webp"),
+    },
+  ];
+
   const renderItem = ({ item, index }) => {
     return (
       <View
@@ -82,14 +106,12 @@ const Trending = () => {
         }}
       >
         <TouchableOpacity
-          onPress={() => movieDetails(item.id)}
+          onPress={() => navigation.navigate("NFTDetail")}
           style={{ width: "100%", height: "100%" }}
           activeOpacity={0.7}
         >
           <Image
-            source={{
-              uri: "https://image.tmdb.org/t/p/w500" + item.poster_path,
-            }}
+            source={item.image}
             style={{
               width: "100%",
               height: "100%",
@@ -105,7 +127,7 @@ const Trending = () => {
   return (
     <View style={{ height: 200, borderRadius: 10, marginBottom: 10 }}>
       <FlatList
-        data={movies}
+        data={featuredNFTs}
         renderItem={renderItem}
         horizontal
         pagingEnabled

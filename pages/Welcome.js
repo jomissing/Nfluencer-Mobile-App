@@ -19,8 +19,8 @@ const RenderWelcomePage = (imageSource, title, paragraph) => (
   </View>
 );
 
-const Welcome = ({ onDismiss }) => {
-  const navigation = useNavigation();
+const Welcome = ({ onDismiss, navigation }) => {
+  // const navigation = useNavigation();
   const [isLastSlide, setIsLastSlide] = useState(false);
 
   const handleSkip = () => {

@@ -51,41 +51,38 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={showWelcome ? "Welcome" : "Main"}
+        // initialRouteName={showWelcome ? "Welcome" : "Main"}
         screenOptions={{ headerShown: false }}
       >
-        {showWelcome ? (
-          <Stack.Screen name="Welcome">
-            {(props) => <Welcome {...props} onDismiss={handleWelcomeDismiss} />}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Main" component={TabNavigator} />
-            <Stack.Screen name="MovieDetails" component={MovieDetails} />
-            <Stack.Screen name="Watch" component={Watch} />
-            <Stack.Screen name="All" component={All} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="UserDetails" component={UserDetails} />
-            <Stack.Screen
-              name="EmailConfirmation"
-              component={EmailConfirmation}
-            />
-            <Stack.Screen name="Inbox" component={Inbox} />
-            <Stack.Screen name="Chat" component={Chat} />
-            <Stack.Screen name="Marketplace" component={Marketplace} />
-            <Stack.Screen
-              name="SearchMarketplace"
-              component={SearchMarketplace}
-            />
-            <Stack.Screen name="NFTDetail" component={NFTDetail} />
-            <Stack.Screen name="GigDetails" component={GigDetails} />
-            <Stack.Screen
-              name="CollectionDetail"
-              component={CollectionDetail}
-            />
-          </>
-        )}
+        {/* {!showWelcome ? ( */}
+        <Stack.Screen name="Welcome">
+          {(props) => <Welcome {...props} onDismiss={handleWelcomeDismiss} />}
+        </Stack.Screen>
+        {/* ) : ( */}
+        <>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Main" component={TabNavigator} />
+          <Stack.Screen name="MovieDetails" component={MovieDetails} />
+          <Stack.Screen name="Watch" component={Watch} />
+          <Stack.Screen name="All" component={All} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="UserDetails" component={UserDetails} />
+          <Stack.Screen
+            name="EmailConfirmation"
+            component={EmailConfirmation}
+          />
+          <Stack.Screen name="Inbox" component={Inbox} />
+          <Stack.Screen name="Chat" component={Chat} />
+          <Stack.Screen name="Marketplace" component={Marketplace} />
+          <Stack.Screen
+            name="SearchMarketplace"
+            component={SearchMarketplace}
+          />
+          <Stack.Screen name="NFTDetail" component={NFTDetail} />
+          <Stack.Screen name="GigDetails" component={GigDetails} />
+          <Stack.Screen name="CollectionDetail" component={CollectionDetail} />
+        </>
+        {/* )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );
