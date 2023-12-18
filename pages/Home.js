@@ -62,7 +62,7 @@ function Home() {
       return;
     }
     setOrdersAsSeller(data);
-    console.log(data);
+    // console.log(data);
   };
 
   const getUserOrdersAsBuyer = async () => {
@@ -77,7 +77,7 @@ function Home() {
       }),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.error) {
       return;
     }
@@ -99,6 +99,8 @@ function Home() {
       { length: 12 },
       (_, index) => earningsByMonth[index] || 0
     );
+
+    // console.log(earnings);
 
     setearningSeries(earnings);
   };
@@ -123,7 +125,7 @@ function Home() {
     });
     const filteredOrders = sortedOrders.slice(0, 4);
     setOverviewOrders(filteredOrders);
-    console.log("Filtered", filteredOrders);
+    // console.log("Filtered", filteredOrders);
   }, [ordersAsSeller, ordersAsBuyer]);
 
   useEffect(() => {
@@ -401,7 +403,7 @@ function Home() {
             <Text className="text-lg font-bold text-gray-800 mb-3">
               Earnings Overview
             </Text>
-            <EarningsChart chartData={earningseries} />
+            {earningseries && <EarningsChart chartData={earningseries} />}
 
             <View className="flex flex-col gap-y-3 px-0 mt-1">
               {earningOverview.map((order, index) => (
