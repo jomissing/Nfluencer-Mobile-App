@@ -353,7 +353,7 @@ function Home() {
               Recent Orders
             </Text>
 
-            <View className="flex flex-col gap-y-3 px-0">
+            <View className="flex flex-col gap-y-3 px-0 mt-1">
               {overviewOrders.map((order, index) => (
                 <View
                   key={index}

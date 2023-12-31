@@ -92,101 +92,6 @@ export default function SearchServices() {
   const [value, setValue] = useState(categories[0]);
   const [isFocus, setIsFocus] = useState(false);
 
-  const NFTs = [
-    {
-      name: "NFT Name Here",
-      price: 0.49,
-      image: require("../assets/nfts/nft1.webp"),
-      category: "Gaming",
-      collection: {
-        name: "Mutants",
-        items: 10,
-      },
-      likes: 0,
-      creator: {
-        name: "John",
-        username: "@johndoe",
-        address: "0x00...uj09",
-        image: require("../assets/nfts/creator.jpg"),
-      },
-      currentOwner: {
-        name: "Owner",
-        username: "@Owner",
-        address: "0x00...uj09",
-        // image: require("../assets/nfts/owner.jpg"),
-      },
-      ownershipHistory: [
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/art.webp"),
-          date: "12/12/2021",
-        },
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/music.webp"),
-          date: "12/12/2021",
-        },
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/pfps.webp"),
-          date: "12/12/2021",
-        },
-      ],
-    },
-    {
-      name: "NFT Name Here",
-      price: 0.49,
-      image: require("../assets/nfts/creator.jpg"),
-      category: "Gaming",
-      collection: {
-        name: "Mutants",
-        items: 10,
-      },
-      likes: 0,
-      creator: {
-        name: "John",
-        username: "@johndoe",
-        address: "0x00...uj09",
-        image: require("../assets/nfts/creator.jpg"),
-      },
-      currentOwner: {
-        name: "Owner",
-        username: "@Owner",
-        address: "0x00...uj09",
-        // image: require("../assets/nfts/owner.jpg"),
-      },
-      ownershipHistory: [
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/art.webp"),
-          date: "12/12/2021",
-        },
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/music.webp"),
-          date: "12/12/2021",
-        },
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/pfps.webp"),
-          date: "12/12/2021",
-        },
-      ],
-    },
-  ];
-
   const [gigs, setGigs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const fetchGigs = async () => {
@@ -197,7 +102,7 @@ export default function SearchServices() {
       });
       const data = await response.json();
       console.log(data);
-      setGigs(data);
+      setGigs(data.gigs);
     } catch (error) {
       console.error(error);
     }
