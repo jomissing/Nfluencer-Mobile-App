@@ -11,7 +11,8 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "./redux/AuthContext";
 import { io } from "socket.io-client";
-import { APP_API_URL } from "@env";
+// import { APP_API_URL } from "@env";
+import Constants from "expo-constants";
 import { useRoute } from "@react-navigation/native";
 
 const messagesData = [
@@ -139,6 +140,7 @@ const messagesData = [
 
 export default function Chat() {
   const navigation = useNavigation();
+  const APP_API_URL = Constants.manifest.extra.APP_API_URL;
   const route = useRoute();
   const { user } = route.params;
   const { userDetails, setUserDetails, clearUserDetails } = useAuth();

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Nfluencer",
-    "slug": "Nfluencer",
+    "name": "nfluencer",
+    "slug": "nfluencer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -18,13 +18,14 @@
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#fff"
       },
-      "package": "com.joharkhan051.MovieLand",
-      "versionCode": 3
+      "package": "com.joharkhan051.nfluencer",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/logo.png"
     },
     "extra": {
+      "APP_API_URL": "https://nfluencer-website-production.up.railway.app",
       "API_KEY": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTUyYzMxODYxYmRmMjYwMzc1YzU3ZDcxODIzOTQ2YyIsInN1YiI6IjY0YTEzNWFmNGE1MmY4MDBhZjEyODUzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k88OvyPmHTMWF39nx0vFA3y79Oy0Kq4_qu8q8afxS10",
       "eas": {
         "projectId": "94638d06-1748-4413-b72b-4f8c7e66c036"

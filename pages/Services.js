@@ -15,10 +15,12 @@ import { Feather, AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Dropdown } from "react-native-element-dropdown";
 import { useNavigation } from "@react-navigation/native";
-import { APP_API_URL } from "@env";
+// import { APP_API_URL } from "@env";
+import Constants from "expo-constants";
 
 export default function SearchServices() {
   const navigation = useNavigation();
+  const APP_API_URL = Constants.manifest.extra.APP_API_URL;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;

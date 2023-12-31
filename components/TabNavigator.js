@@ -10,8 +10,6 @@ import {
   MaterialIcons,
   Ionicons,
 } from "@expo/vector-icons";
-import Settings from "../pages/Settings";
-import Search from "../pages/Search";
 import Inbox from "../pages/Inbox";
 import Marketplace from "../pages/Marketplace";
 import SearchServices from "../pages/Services";

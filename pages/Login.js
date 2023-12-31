@@ -12,10 +12,12 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { APP_API_URL } from "@env";
+// import { APP_API_URL } from "@env";
+import Constants from "expo-constants";
 import { useAuth } from "./redux/AuthContext";
 
 export default function Login() {
+  const APP_API_URL = Constants.manifest.extra.APP_API_URL;
   const [email, setEmail] = useState("joharkhan@mailsac.com");
   const [password, setPassword] = useState("joharkhan@mailsac.com");
   const [errorMessage, setErrorMessage] = useState("");

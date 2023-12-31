@@ -4,9 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Welcome from "../pages/Welcome";
 import TabNavigator from "./TabNavigator";
-import MovieDetails from "../pages/MovieDetails";
-import Watch from "../pages/Watch";
-import All from "../pages/All";
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import UserDetails from "../pages/UserDetails";
@@ -62,9 +59,6 @@ const StackNavigator = () => {
         <>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Main" component={TabNavigator} />
-          <Stack.Screen name="MovieDetails" component={MovieDetails} />
-          <Stack.Screen name="Watch" component={Watch} />
-          <Stack.Screen name="All" component={All} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="UserDetails" component={UserDetails} />
           <Stack.Screen

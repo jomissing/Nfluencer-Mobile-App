@@ -10,10 +10,12 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { APP_API_URL } from "@env";
+// import { APP_API_URL } from "@env";
+import Constants from "expo-constants";
 
 export default function GigDetails() {
   const navigation = useNavigation();
+  const APP_API_URL = Constants.manifest.extra.APP_API_URL;
 
   const route = useRoute();
   const { gig_id } = route.params;

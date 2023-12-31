@@ -10,12 +10,15 @@ import {
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "./redux/AuthContext";
-import { APP_API_URL } from "@env";
+// import { APP_API_URL } from "@env";
+import Constants from "expo-constants";
 
 export default function Inbox() {
   const navigation = useNavigation();
   const [users, setUsers] = useState([]);
   const { userDetails, setUserDetails, clearUserDetails } = useAuth();
+  const APP_API_URL = Constants.manifest.extra.APP_API_URL;
+
   useEffect(() => {
     if (!userDetails) {
       navigation.navigate("Login");
