@@ -4,7 +4,7 @@
     "slug": "nfluencer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/logoresize.png",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#574bef"
@@ -15,7 +15,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
+        "foregroundImage": "./assets/foreground.png",
         "backgroundColor": "#fff"
       },
       "package": "com.joharkhan051.nfluencer",
@@ -28,7 +28,7 @@
       "APP_API_URL": "https://nfluencer-website-production.up.railway.app",
       "API_KEY": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYTUyYzMxODYxYmRmMjYwMzc1YzU3ZDcxODIzOTQ2YyIsInN1YiI6IjY0YTEzNWFmNGE1MmY4MDBhZjEyODUzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k88OvyPmHTMWF39nx0vFA3y79Oy0Kq4_qu8q8afxS10",
       "eas": {
-        "projectId": "94638d06-1748-4413-b72b-4f8c7e66c036"
+        "projectId": "b142ba40-0f37-4884-a55f-0bcbf7950fcf"
       }
     }
   }
