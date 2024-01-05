@@ -32,7 +32,7 @@ export default function Inbox() {
         "Content-Type": "application/json",
         "x-auth-token": userDetails.jwtToken,
       },
-      body: JSON.stringify({ username: userDetails.username }),
+      body: JSON.stringify({ userid: userDetails._id }),
     });
     const data = await res.json();
     if (data.error) {

@@ -256,83 +256,86 @@ export default function SearchServices() {
 
       <ScrollView className="px-3">
         <View className="flex flex-row flex-wrap items-start">
-          {filteredGigs.map((gig, index) => (
-            <TouchableOpacity
-              onPress={() => gigDetails(gig._id)}
-              className=""
-              style={{ width: "50%" }}
-              key={index}
-            >
-              <View className="w-40 m-3">
-                <View
-                  className="rounded-xl shadow-xl bg-white"
-                  style={{
-                    backgroundColor: "#fff",
-                    shadowColor: "#999",
-                    shadowOffset: { width: 10, height: 2 },
-                    shadowOpacity: 0.3,
-                    shadowRadius: 4,
-                    elevation: 10,
-                  }}
+          {filteredGigs.map(
+            (gig, index) =>
+              gig["user"] && (
+                <TouchableOpacity
+                  onPress={() => gigDetails(gig._id)}
+                  className=""
+                  style={{ width: "50%" }}
+                  key={index}
                 >
-                  <View className="relative">
-                    <Image
-                      source={{
-                        uri: gig["images"][0],
+                  <View className="w-40 m-3">
+                    <View
+                      className="rounded-xl shadow-xl bg-white"
+                      style={{
+                        backgroundColor: "#fff",
+                        shadowColor: "#999",
+                        shadowOffset: { width: 10, height: 2 },
+                        shadowOpacity: 0.3,
+                        shadowRadius: 4,
+                        elevation: 10,
                       }}
-                      className="w-full object-cover h-40 rounded-t-2xl rounded-b-2xl"
-                    />
-                    <TouchableOpacity
-                      onPress={() => console.log("Options pressed")}
-                      className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
                     >
-                      <AntDesign
-                        name="heart"
-                        size={14}
-                        color="rgb(120,82,243)"
-                      />
-                      <Text className="text-nft-primary-light ml-1 font-bold text-sm">
-                        {0}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  <View className="p-2 pt-1">
-                    <Text className="mb-2 font-medium text-base text-gray-800">
-                      {gig["title"].substring(0, 35)}..
-                    </Text>
-
-                    <View className="flex justify-between flex-row items-center">
-                      <View className="flex flex-row items-center gap-1">
+                      <View className="relative">
                         <Image
                           source={{
-                            uri: gig["user"]["avatar"],
+                            uri: gig["images"][0],
                           }}
-                          className="w-10 h-10 object-cover rounded-full"
+                          className="w-full object-cover h-40 rounded-t-2xl rounded-b-2xl"
                         />
-                        <View className="flex flex-col justify-start items-center">
-                          <Text className="text-gray-800 font-semibold text-left w-full text-xs">
-                            {gig["user"]["username"]}
+                        <TouchableOpacity
+                          onPress={() => console.log("Options pressed")}
+                          className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
+                        >
+                          <AntDesign
+                            name="heart"
+                            size={14}
+                            color="rgb(120,82,243)"
+                          />
+                          <Text className="text-nft-primary-light ml-1 font-bold text-sm">
+                            {0}
                           </Text>
+                        </TouchableOpacity>
+                      </View>
+
+                      <View className="p-2 pt-1">
+                        <Text className="mb-2 font-medium text-base text-gray-800">
+                          {gig["title"].substring(0, 35)}..
+                        </Text>
+
+                        <View className="flex justify-between flex-row items-center">
+                          <View className="flex flex-row items-center gap-1">
+                            <Image
+                              source={{
+                                uri: gig["user"]["avatar"],
+                              }}
+                              className="w-10 h-10 object-cover rounded-full"
+                            />
+                            <View className="flex flex-col justify-start items-center">
+                              <Text className="text-gray-800 font-semibold text-left w-full text-xs">
+                                {gig["user"]["username"]}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+
+                        <View className="flex flex-row items-end gap-1 ">
+                          <View className="flex items-center justify-start gap-1 flex-row">
+                            <Text className="text-base font-bold pt-2">
+                              <Text className="text-xs font-normal text-gray-500">
+                                starts from
+                              </Text>{" "}
+                              ${gig["packages"]["basic"]["price"]}
+                            </Text>
+                          </View>
                         </View>
                       </View>
                     </View>
-
-                    <View className="flex flex-row items-end gap-1 ">
-                      <View className="flex items-center justify-start gap-1 flex-row">
-                        <Text className="text-base font-bold pt-2">
-                          <Text className="text-xs font-normal text-gray-500">
-                            starts from
-                          </Text>{" "}
-                          ${gig["packages"]["basic"]["price"]}
-                        </Text>
-                      </View>
-                    </View>
                   </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-          ))}
+                </TouchableOpacity>
+              )
+          )}
         </View>
       </ScrollView>
     </View>

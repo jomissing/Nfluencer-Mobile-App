@@ -102,7 +102,7 @@ function Home() {
       (_, index) => earningsByMonth[index] || 0
     );
 
-    // console.log(earnings);
+    console.log(earnings);
 
     setearningSeries(earnings);
   };
@@ -275,16 +275,6 @@ function Home() {
                     <Text className="text-3xl font-bold text-white">
                       ${totalProfits}
                     </Text>
-                    <View className="flex flex-row space-x-1 items-center bg-green-100 rounded-full px-1">
-                      <Feather
-                        name="trending-up"
-                        size={8}
-                        color="rgb(22 101 52)"
-                      />
-                      <Text className="text-green-800 text-xs">
-                        {profitRisePercentage.toFixed(2)}%
-                      </Text>
-                    </View>
                   </View>
                   <Text className="text-sm text-white font-normal">
                     Total Profits
@@ -309,16 +299,6 @@ function Home() {
                     <Text className="text-3xl font-bold text-white">
                       {totalNewOrders}
                     </Text>
-                    <View className="flex flex-row space-x-1 items-center bg-green-100 rounded-full px-1">
-                      <Feather
-                        name="trending-up"
-                        size={8}
-                        color="rgb(22 101 52)"
-                      />
-                      <Text className="text-green-800 text-xs">
-                        {percentIncrease.toFixed(2)}%
-                      </Text>
-                    </View>
                   </View>
                   <Text className="text-sm text-white font-normal">
                     New Customers

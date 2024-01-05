@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   ScrollView,
+  Linking,
 } from "react-native";
 // import {ArrowLeftIcon} from 'react-native-heroicons/solid';
 import { Feather } from "@expo/vector-icons";
@@ -18,8 +19,8 @@ import { useAuth } from "./redux/AuthContext";
 
 export default function Login() {
   const APP_API_URL = Constants.manifest.extra.APP_API_URL;
-  const [email, setEmail] = useState("joharkhan@mailsac.com");
-  const [password, setPassword] = useState("joharkhan@mailsac.com");
+  const [email, setEmail] = useState("gulahmad@mailsac.com");
+  const [password, setPassword] = useState("gulahmad@mailsac.com");
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -71,15 +72,9 @@ export default function Login() {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (
-            (data.error && data.emailNotFound) ||
-            (data.error && data.incorrectPassword)
-          ) {
-            setErrorMessage(data.message);
-            return;
-          }
-
-          if (data.error) {
+          console.log(data);
+          if (data.error && data.error == true) {
+            setHasError(true);
             setErrorMessage(data.message);
             return;
           }
@@ -98,6 +93,11 @@ export default function Login() {
     }
 
     setIsSubmitting(false);
+  };
+
+  const handleLinkPress = () => {
+    const externalLink = "https://nfluencer-website.vercel.app/";
+    Linking.openURL(externalLink);
   };
 
   return (
@@ -206,7 +206,7 @@ export default function Login() {
               <Text className="text-sm text-gray-500 font-semibold block">
                 Don't have an account?
               </Text>
-              <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+              <TouchableOpacity onPress={handleLinkPress}>
                 <Text className="font-semibold text-nft-primary-light">
                   {" "}
                   Sign Up on NFLUENCER Website
