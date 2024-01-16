@@ -264,10 +264,7 @@ export default function Marketplace() {
             Featured
           </Text>
 
-          <TouchableOpacity
-            onPress={() => console.log("Options pressed")}
-            className="flex flex-row gap-1 items-center"
-          >
+          <TouchableOpacity className="flex flex-row gap-1 items-center">
             <Text className="font-semibold underline">See all</Text>
             <AntDesign name="right" size={20} color="#333" />
           </TouchableOpacity>
@@ -301,10 +298,7 @@ export default function Marketplace() {
                       source={nft.image}
                       className="w-full object-cover h-56 rounded-2xl"
                     />
-                    <TouchableOpacity
-                      onPress={() => console.log("Options pressed")}
-                      className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
-                    >
+                    <TouchableOpacity className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
                       <AntDesign
                         name="heart"
                         size={14}
@@ -418,10 +412,7 @@ export default function Marketplace() {
             Top sellers
           </Text>
 
-          <TouchableOpacity
-            onPress={() => console.log("Options pressed")}
-            className="flex flex-row gap-1 items-center"
-          >
+          <TouchableOpacity className="flex flex-row gap-1 items-center">
             <Text className="font-semibold underline">See all</Text>
             <AntDesign name="right" size={20} color="#333" />
           </TouchableOpacity>
@@ -483,10 +474,7 @@ export default function Marketplace() {
             Collections
           </Text>
 
-          <TouchableOpacity
-            onPress={() => console.log("Options pressed")}
-            className="flex flex-row gap-1 items-center"
-          >
+          <TouchableOpacity className="flex flex-row gap-1 items-center">
             <Text className="font-semibold underline">See all</Text>
             <AntDesign name="right" size={20} color="#333" />
           </TouchableOpacity>
@@ -515,10 +503,7 @@ export default function Marketplace() {
                     source={require("../assets/nfts/creator.jpg")}
                     className="w-full object-cover h-56 rounded-t-2xl"
                   />
-                  <TouchableOpacity
-                    onPress={() => console.log("Options pressed")}
-                    className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
-                  >
+                  <TouchableOpacity className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
                     <AntDesign name="heart" size={14} color="rgb(120,82,243)" />
                     <Text className="text-nft-primary-light ml-1 font-bold text-sm">
                       10

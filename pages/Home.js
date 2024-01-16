@@ -64,7 +64,6 @@ function Home() {
       return;
     }
     setOrdersAsSeller(data);
-    // console.log(data);
   };
 
   const getUserOrdersAsBuyer = async () => {
@@ -79,12 +78,10 @@ function Home() {
       }),
     });
     const data = await res.json();
-    // console.log(data);
     if (data.error) {
       return;
     }
     setOrdersAsBuyer(data);
-    // console.log(data);
   };
 
   const getEarnings = () => {
@@ -101,8 +98,6 @@ function Home() {
       { length: 12 },
       (_, index) => earningsByMonth[index] || 0
     );
-
-    console.log(earnings);
 
     setearningSeries(earnings);
   };
@@ -127,7 +122,6 @@ function Home() {
     });
     const filteredOrders = sortedOrders.slice(0, 4);
     setOverviewOrders(filteredOrders);
-    // console.log("Filtered", filteredOrders);
   }, [ordersAsSeller, ordersAsBuyer]);
 
   useEffect(() => {
@@ -218,7 +212,7 @@ function Home() {
   return (
     <View className="flex-1 bg-white pt-7 pb-5">
       {/* Top Bar */}
-      <View className="flex-row justify-between items-center p-4">
+      <View className="flex-row justify-between items-center p-4 pt-0">
         <Text className="text-2xl font-bold text-gray-800">
           {userDetails["name"]}
         </Text>

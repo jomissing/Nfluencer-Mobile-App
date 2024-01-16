@@ -103,7 +103,6 @@ export default function SearchServices() {
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
-      console.log(data);
       setGigs(data.gigs);
     } catch (error) {
       console.error(error);
@@ -132,7 +131,7 @@ export default function SearchServices() {
   return (
     <View className="flex-1 bg-white pt-7 pb-0">
       {/* Top Bar */}
-      <View className="flex-col p-4">
+      <View className="flex-col p-4 pt-0">
         <View className="flex-row items-center justify-start gap-4">
           <Text className="text-2xl font-bold text-gray-800">
             Search Services
@@ -285,7 +284,6 @@ export default function SearchServices() {
                           className="w-full object-cover h-40 rounded-t-2xl rounded-b-2xl"
                         />
                         <TouchableOpacity
-                          onPress={() => console.log("Options pressed")}
                           className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
                         >
                           <AntDesign

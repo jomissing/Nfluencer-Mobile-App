@@ -32,7 +32,6 @@ export default function GigDetails() {
       }),
     });
     const res = await req.json();
-    console.log(res);
     setGig(res[0]);
   };
 
@@ -92,10 +91,7 @@ export default function GigDetails() {
             }}
             className="w-full object-cover h-60 rounded-2xl"
           />
-          <TouchableOpacity
-            onPress={() => console.log("Options pressed")}
-            className="absolute top-4 right-6 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
-          >
+          <TouchableOpacity className="absolute top-4 right-6 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
             <AntDesign name="heart" size={14} color="rgb(120,82,243)" />
             <Text className="text-nft-primary-light ml-1 font-bold text-sm">
               44

@@ -40,7 +40,6 @@ export default function Inbox() {
       return;
     }
     setUsers(data.users);
-    console.log(data.users);
   };
 
   useEffect(() => {
@@ -62,7 +61,7 @@ export default function Inbox() {
       {/* Top Bar */}
       <View className="flex flex-row justify-between items-center p-4 pb-0">
         <Text className="text-2xl font-bold text-gray-800">Inbox</Text>
-        <TouchableOpacity onPress={() => console.log("Sorting icon pressed")}>
+        <TouchableOpacity>
           <AntDesign name="filter" size={24} color="#333" />
         </TouchableOpacity>
       </View>

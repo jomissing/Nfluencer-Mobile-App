@@ -20,7 +20,6 @@ function Reviews({ movie_id }) {
         });
         const data = await response.json();
         setReviews(data.results);
-        // console.log(data.results);
       } catch (error) {
         console.error("Error:", error.message);
       }
@@ -28,14 +27,6 @@ function Reviews({ movie_id }) {
 
     fetchData();
   }, [movie_id]);
-
-  // const getAvatarSource = (avatarPath) => {
-  //   if (avatarPath.startsWith("/https://")) {
-  //     return { uri: avatarPath.replace("/https://", "https://") };
-  //   } else {
-  //     return { uri: "https://image.tmdb.org/t/p/w500" + avatarPath };
-  //   }
-  // };
 
   const getAvatarSource = (avatarPath) => {
     if (avatarPath && avatarPath.startsWith("/https://")) {

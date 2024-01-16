@@ -159,7 +159,6 @@ export default function Chat() {
     });
 
     socket.on("user-disconnected", async (disconnectedUserId) => {
-      console.log("User disconnected:", disconnectedUserId);
       fetchChatId(userDetails._id, selectedUser._id)
         .then(async (data) => {
           setSelectedChatId(data);
@@ -186,7 +185,6 @@ export default function Chat() {
         }),
       });
       const data = await response.json();
-      console.log("DIS", data.messages);
       if (data.error) {
         setMessages([]);
         return;
@@ -234,7 +232,6 @@ export default function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(user);
 
     socket.emit("message", {
       text: newMessage,
@@ -280,7 +277,7 @@ export default function Chat() {
         </View>
 
         <View>
-          <TouchableOpacity onPress={() => console.log("Options pressed")}>
+          <TouchableOpacity>
             <Feather name="more-vertical" size={24} color="#333" />
           </TouchableOpacity>
         </View>

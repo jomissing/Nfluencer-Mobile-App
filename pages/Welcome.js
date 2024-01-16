@@ -35,9 +35,7 @@ const Welcome = ({ onDismiss, navigation }) => {
     }
   };
 
-  const onIndexChanged = (index) => {
-    console.log("Current Slide Index:", index);
-  };
+  const onIndexChanged = (index) => {};
 
   const onMomentumScrollEnd = (e, state, context) => {
     const lastIndex = state.total - 1;

@@ -19,8 +19,8 @@ import { useAuth } from "./redux/AuthContext";
 
 export default function Login() {
   const APP_API_URL = Constants.manifest.extra.APP_API_URL;
-  const [email, setEmail] = useState("gulahmad@mailsac.com");
-  const [password, setPassword] = useState("gulahmad@mailsac.com");
+  const [email, setEmail] = useState("joharkhan@mailsac.com");
+  const [password, setPassword] = useState("joharkhan@mailsac.com");
   const [errorMessage, setErrorMessage] = useState("");
   const [hasError, setHasError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -39,8 +39,6 @@ export default function Login() {
       setIsSubmitting(false);
     };
   }, []);
-
-  // console.log(userDetails);
 
   // redirect to main if user is already logged in
   useEffect(() => {
@@ -72,7 +70,6 @@ export default function Login() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.error && data.error == true) {
             setHasError(true);
             setErrorMessage(data.message);
@@ -82,8 +79,6 @@ export default function Login() {
           if (data.token) {
             setErrorMessage("");
             setHasError(false);
-            console.log(data);
-            console.log(data.user);
             setUserDetails(data.user);
             navigation.navigate("Main");
           }
@@ -95,8 +90,8 @@ export default function Login() {
     setIsSubmitting(false);
   };
 
-  const handleLinkPress = () => {
-    const externalLink = "https://nfluencer-website.vercel.app/";
+  const handleLinkPress = (url) => {
+    const externalLink = url;
     Linking.openURL(externalLink);
   };
 
@@ -197,16 +192,34 @@ export default function Login() {
             </View>
 
             <View className="w-3/4 mx-auto">
-              <Text className="text-gray-400 text-xs text-center">
-                By signing in, you agree to our Terms of Use and Privacy Policy.
-              </Text>
+              <View className="flex items-center text-center">
+                <Text className="text-gray-400 text-xs">
+                  By signing in, you agree to our
+                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    handleLinkPress(
+                      "https://nfluencer-website.vercel.app/terms-and-conditions"
+                    )
+                  }
+                  className="inline"
+                >
+                  <Text className="text-xs text-nft-primary-light">
+                    Terms and Conditions of Use.
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
 
             <View className="flex-col justify-center w-full items-center mt-7">
               <Text className="text-sm text-gray-500 font-semibold block">
                 Don't have an account?
               </Text>
-              <TouchableOpacity onPress={handleLinkPress}>
+              <TouchableOpacity
+                onPress={() =>
+                  handleLinkPress("https://nfluencer-website.vercel.app/signup")
+                }
+              >
                 <Text className="font-semibold text-nft-primary-light">
                   {" "}
                   Sign Up on NFLUENCER Website

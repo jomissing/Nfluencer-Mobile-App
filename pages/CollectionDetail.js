@@ -22,15 +22,6 @@ export default function CollectionDetail() {
             source={require("../assets/nfts/nft1.webp")}
             className="w-full object-cover h-32 rounded-2xl"
           />
-          {/* <TouchableOpacity
-            onPress={() => console.log("Options pressed")}
-            className="absolute top-4 right-6 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
-          >
-            <AntDesign name="heart" size={14} color="rgb(120,82,243)" />
-            <Text className="text-nft-primary-light ml-1 font-bold text-sm">
-              44
-            </Text>
-          </TouchableOpacity> */}
         </View>
 
         <View className="p-4 pt-0 mb-36">

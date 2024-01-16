@@ -175,10 +175,7 @@ export default function NFTDetail() {
             source={require("../assets/nfts/nft1.webp")}
             className="w-full object-cover h-60 rounded-2xl"
           />
-          <TouchableOpacity
-            onPress={() => console.log("Options pressed")}
-            className="absolute top-4 right-6 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
-          >
+          <TouchableOpacity className="absolute top-4 right-6 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
             <AntDesign name="heart" size={14} color="rgb(120,82,243)" />
             <Text className="text-nft-primary-light ml-1 font-bold text-sm">
               44
@@ -576,10 +573,7 @@ export default function NFTDetail() {
                         source={nft.image}
                         className="w-full object-cover h-56 rounded-2xl"
                       />
-                      <TouchableOpacity
-                        onPress={() => console.log("Options pressed")}
-                        className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center"
-                      >
+                      <TouchableOpacity className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
                         <AntDesign
                           name="heart"
                           size={14}
