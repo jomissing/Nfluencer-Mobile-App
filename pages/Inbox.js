@@ -13,12 +13,14 @@ import { useAuth } from "./redux/AuthContext";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 export default function Inbox() {
   const navigation = useNavigation();
   const [users, setUsers] = useState([]);
   const { userDetails, setUserDetails, clearUserDetails } = useAuth();
   const APP_API_URL = Constants.manifest.extra.APP_API_URL;
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   useEffect(() => {
     if (!userDetails) {
@@ -58,20 +60,26 @@ export default function Inbox() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white">
+    <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         {/* Top Bar */}
         <View className="flex flex-row justify-between items-center p-4 pb-0 pt-0">
-          <Text className="text-2xl font-bold text-gray-800">Inbox</Text>
+          <Text className="text-2xl font-bold text-gray-800 dark:text-white">
+            Inbox
+          </Text>
           <TouchableOpacity>
-            <AntDesign name="filter" size={24} color="#333" />
+            <AntDesign
+              name="filter"
+              size={24}
+              color={isDarkMode ? "#fff" : "#333"}
+            />
           </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
         <View className="p-4">
           <TextInput
-            className=" text-gray-800 text-base font-normal p-3 bg-gray-100 rounded-lg"
+            className=" text-gray-800 text-base font-normal p-3 bg-gray-100 rounded-lg dark:text-white dark:bg-gray-500"
             placeholder="Search for a user"
             placeholderTextColor="rgb(156 163 175)"
             value={search}
@@ -85,7 +93,7 @@ export default function Inbox() {
             <TouchableOpacity
               key={user._id}
               onPress={() => goToChat(user)}
-              className="flex flex-row items-center border-b border-gray-50 p-4 gap-4 py-4"
+              className="flex flex-row items-center border-b border-gray-50 p-4 gap-4 py-4 dark:border-gray-600"
             >
               <View className="relative">
                 <Image
@@ -95,7 +103,7 @@ export default function Inbox() {
                 <View className="absolute bottom-0 right-1 w-3 h-3 bg-green-600 border border-gray-50 rounded-full" />
               </View>
               <View className="flex-1 items-start">
-                <Text className="text-base font-bold text-gray-800">
+                <Text className="text-base font-bold text-gray-800 dark:text-white">
                   {user.name}
                 </Text>
                 <Text className="text-xs font-normal text-gray-400">

@@ -79,8 +79,8 @@ export default function GigDetails() {
 
   if (!gig)
     return (
-      <View>
-        <Text>Loading...</Text>
+      <View className="flex-1 items-center justify-center dark:bg-[#24293e]">
+        <Text className="dark:text-white">Loading...</Text>
       </View>
     );
   return (

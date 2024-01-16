@@ -295,7 +295,7 @@ export default function SearchMarketplace() {
               left: 0,
               width: "100%",
               height: "70%",
-              backgroundColor: "white",
+              backgroundColor: isDarkMode ? "#24293e" : "white",
               zIndex: 100,
               borderTopLeftRadius: 20,
               borderTopRightRadius: 20,
@@ -305,7 +305,9 @@ export default function SearchMarketplace() {
           <View className="w-full h-full p-10 px-5 pt-5">
             <ScrollView>
               <View className="flex justify-between items-center flex-row border-b border-gray-200 pb-3">
-                <Text className="font-semibold text-lg">Filters</Text>
+                <Text className="font-semibold text-lg dark:text-white">
+                  Filters
+                </Text>
                 <TouchableOpacity
                   onPress={closeSidebar}
                   className="rounded-full bg-gray-100 p-1"
@@ -317,7 +319,7 @@ export default function SearchMarketplace() {
 
               <View className="py-3 flex flex-col gap-3">
                 <View>
-                  <Text className="font-semibold text-base text-gray-800 mb-2">
+                  <Text className="font-semibold text-base text-gray-800 mb-2 dark:text-white">
                     Category
                   </Text>
                   <Dropdown
@@ -359,12 +361,12 @@ export default function SearchMarketplace() {
 
                 <View>
                   <View className="flex justify-between items-center flex-row mb-3">
-                    <Text className="font-semibold text-base text-gray-800">
+                    <Text className="font-semibold text-base text-gray-800 dark:text-white">
                       Price
                     </Text>
                     <View className="flex items-center gap-1 flex-row">
                       <Text className="text-xs text-gray-500">Currency</Text>
-                      <Text>ETH</Text>
+                      <Text className="dark:text-white">ETH</Text>
                       <Image
                         source={require("../assets/nfts/eth.png")}
                         alt=""
@@ -406,7 +408,7 @@ export default function SearchMarketplace() {
 
                   <View className="flex gap-2 items-center justify-between flex-row">
                     <TouchableOpacity type="number" className="flex-1">
-                      <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                      <Text className="text-gray-800 dark:text-white text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
                         All
                       </Text>
                     </TouchableOpacity>
@@ -416,7 +418,7 @@ export default function SearchMarketplace() {
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity type="number" className="flex-1">
-                      <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                      <Text className="text-gray-800 dark:text-white text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
                         Video
                       </Text>
                     </TouchableOpacity>

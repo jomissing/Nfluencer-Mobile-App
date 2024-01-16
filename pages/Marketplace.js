@@ -510,7 +510,7 @@ export default function Marketplace() {
                 <View
                   className="rounded-xl shadow-xl bg-white dark:bg-[#24293e]"
                   style={{
-                    shadowColor: "#999",
+                    shadowColor: isDarkMode ? "#000" : "#999",
                     shadowOffset: { width: 10, height: 2 },
                     shadowOpacity: 0.3,
                     shadowRadius: 4,

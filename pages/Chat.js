@@ -15,6 +15,7 @@ import { io } from "socket.io-client";
 import Constants from "expo-constants";
 import { useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 const messagesData = [
   {
@@ -145,6 +146,7 @@ export default function Chat() {
   const route = useRoute();
   const { user } = route.params;
   const { userDetails, setUserDetails, clearUserDetails } = useAuth();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const selectedUser = user;
   const [messages, setMessages] = useState([]);
@@ -261,8 +263,11 @@ export default function Chat() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white pt-0">
+    <SafeAreaView
+      style={{ flex: 1 }}
+      className="bg-white dark:bg-nft-primary-light"
+    >
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         {/* Top Bar */}
         <View className="flex-row justify-between items-center px-4 pt-0 bg-nft-primary-light">
           <View className="flex-1 flex-row items-center justify-start py-3">
@@ -315,24 +320,34 @@ export default function Chat() {
               <View style={{ flex: 1 }}>
                 <View className="flex-1 flex-row items-center gap-4">
                   <Text
-                    style={{ fontSize: 14, fontWeight: "bold", color: "#333" }}
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold",
+                      color: isDarkMode ? "#fff" : "#333",
+                    }}
                   >
                     {userDetails._id === message.receiver
                       ? selectedUser.username
                       : userDetails.username}
                   </Text>
-                  <Text style={{ color: "#999" }}>
+                  <Text
+                    style={{
+                      color: isDarkMode ? "rgba(156, 163, 175, 1)" : "#999",
+                    }}
+                  >
                     {formatDate(message.createdAt)}
                   </Text>
                 </View>
-                <Text className="text-gray-800">{message.text}</Text>
+                <Text className="text-gray-800 dark:text-gray-400">
+                  {message.text}
+                </Text>
               </View>
             </View>
           ))}
         </ScrollView>
 
         {/* Message Input Area */}
-        <View className="flex-row justify-between items-center py-4 px-2 flex border-t border-t-gray-100 bg-gray-50 shadow-lg">
+        <View className="flex-row justify-between items-center py-4 px-2 flex border-t border-t-gray-100 bg-gray-50 shadow-lg dark:bg-gray-700 dark:border-t-gray-600">
           <TextInput
             className="flex-1 h-auto max-h-28 font-semibold"
             placeholder="Type a message..."

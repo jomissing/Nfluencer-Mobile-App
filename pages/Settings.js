@@ -21,18 +21,20 @@ function Settings() {
 
   const handleColorScheme = () => {
     toggleDarkMode();
-    AsyncStorage.setItem("colorScheme", isDarkMode ? "dark" : "light");
 
-    setDarkModeSwitch((prev) => {
-      const newMode = !prev;
-      AsyncStorage.setItem("colorScheme", newMode ? "dark" : "light");
-      return newMode;
-    });
+    setDarkModeSwitch(isDarkMode);
+    // AsyncStorage.setItem("colorScheme", isDarkMode ? "dark" : "light");
+
+    // setDarkModeSwitch((prev) => {
+    //   const newMode = !prev;
+    //   AsyncStorage.setItem("colorScheme", newMode ? "dark" : "light");
+    //   return newMode;
+    // });
   };
 
-  useEffect(() => {
-    setColorScheme(darkModeSwitch ? "dark" : "light");
-  }, [darkModeSwitch]);
+  // useEffect(() => {
+  //   setColorScheme(darkModeSwitch ? "dark" : "light");
+  // }, [darkModeSwitch]);
 
   const handleLogout = () => {
     clearUserDetails();
