@@ -19,22 +19,18 @@ function Settings() {
   const { setColorScheme } = useColorScheme();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
+  console.log(isDarkMode);
+
   const handleColorScheme = () => {
     toggleDarkMode();
 
     setDarkModeSwitch(isDarkMode);
-    // AsyncStorage.setItem("colorScheme", isDarkMode ? "dark" : "light");
-
-    // setDarkModeSwitch((prev) => {
-    //   const newMode = !prev;
-    //   AsyncStorage.setItem("colorScheme", newMode ? "dark" : "light");
-    //   return newMode;
-    // });
+    AsyncStorage.setItem("colorScheme", isDarkMode ? "dark" : "light");
   };
 
-  // useEffect(() => {
-  //   setColorScheme(darkModeSwitch ? "dark" : "light");
-  // }, [darkModeSwitch]);
+  useEffect(() => {
+    setColorScheme(isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
 
   const handleLogout = () => {
     clearUserDetails();
@@ -80,11 +76,9 @@ function Settings() {
                     false: "#ccc",
                     true: "rgba(120, 82, 243, 0.4)",
                   }}
-                  thumbColor={
-                    darkModeSwitch ? "rgba(120, 82, 243, 1)" : "#f4f3f4"
-                  }
+                  thumbColor={isDarkMode ? "rgba(120, 82, 243, 1)" : "#f4f3f4"}
                   onValueChange={handleColorScheme}
-                  value={darkModeSwitch}
+                  value={isDarkMode}
                 />
               </View>
 
@@ -93,7 +87,7 @@ function Settings() {
                 onPress={handleLogout}
               >
                 <View className="flex items-center flex-row gap-5">
-                  {darkModeSwitch ? (
+                  {isDarkMode ? (
                     <MaterialIcons
                       name="logout"
                       size={24}
