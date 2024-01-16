@@ -195,69 +195,71 @@ export default function SearchMarketplace() {
   ];
 
   return (
-    <View className="flex-1 bg-white pt-7 pb-0">
-      {/* Top Bar */}
-      <View className="flex-col p-4 pt-0">
-        <View className="flex-row items-center justify-start gap-4">
-          <TouchableOpacity onPress={() => navigation.goBack("Marketplace")}>
-            <AntDesign name="arrowleft" size={24} color="#333" />
-          </TouchableOpacity>
-          <Text className="text-2xl font-bold text-gray-800">
-            Search Marketplace
-          </Text>
-        </View>
-
-        <View className="flex flex-row items-center gap-3 mt-1">
-          <View className="flex-1 relative">
-            <TextInput
-              className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
-              placeholder="Search..."
-              placeholderTextColor="rgb(156 163 175)"
-            />
-            <View className="absolute top-3.5 right-2 block">
-              <AntDesign
-                name="search1"
-                size={24}
-                color="border-color: rgb(209 213 219)"
-              />
-            </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View className="flex-1 bg-white">
+        {/* Top Bar */}
+        <View className="flex-col p-4 pt-0">
+          <View className="flex-row items-center justify-start gap-4">
+            <TouchableOpacity onPress={() => navigation.goBack("Marketplace")}>
+              <AntDesign name="arrowleft" size={24} color="#333" />
+            </TouchableOpacity>
+            <Text className="text-2xl font-bold text-gray-800">
+              Search Marketplace
+            </Text>
           </View>
-          <TouchableOpacity
-            onPress={isSidebarOpen ? closeSidebar : openSidebar}
-            className="bg-gray-100 p-4 rounded-xl"
-          >
-            <Ionicons name="filter-outline" size={24} color="#333" />
-          </TouchableOpacity>
-        </View>
 
-        <View className="flex flex-row justify-between items-center p-0 mt-3">
-          <TouchableOpacity
-            className="text-center flex-1 items-center"
-            onPress={() => handleTabChange("NFTs")}
-          >
-            <Text
-              className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
-                activeTab === "NFTs" && " border-gray-800 text-gray-800"
-              }`}
+          <View className="flex flex-row items-center gap-3 mt-1">
+            <View className="flex-1 relative">
+              <TextInput
+                className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
+                placeholder="Search..."
+                placeholderTextColor="rgb(156 163 175)"
+              />
+              <View className="absolute top-3.5 right-2 block">
+                <AntDesign
+                  name="search1"
+                  size={24}
+                  color="border-color: rgb(209 213 219)"
+                />
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={isSidebarOpen ? closeSidebar : openSidebar}
+              className="bg-gray-100 p-4 rounded-xl"
             >
-              NFTs
-            </Text>
-          </TouchableOpacity>
+              <Ionicons name="filter-outline" size={24} color="#333" />
+            </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            className="text-center flex-1 items-center"
-            onPress={() => handleTabChange("Collections")}
-          >
-            <Text
-              className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
-                activeTab === "Collections" && " border-gray-800 text-gray-800"
-              }`}
+          <View className="flex flex-row justify-between items-center p-0 mt-3">
+            <TouchableOpacity
+              className="text-center flex-1 items-center"
+              onPress={() => handleTabChange("NFTs")}
             >
-              Collections
-            </Text>
-          </TouchableOpacity>
+              <Text
+                className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
+                  activeTab === "NFTs" && " border-gray-800 text-gray-800"
+                }`}
+              >
+                NFTs
+              </Text>
+            </TouchableOpacity>
 
-          {/* <TouchableOpacity
+            <TouchableOpacity
+              className="text-center flex-1 items-center"
+              onPress={() => handleTabChange("Collections")}
+            >
+              <Text
+                className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
+                  activeTab === "Collections" &&
+                  " border-gray-800 text-gray-800"
+                }`}
+              >
+                Collections
+              </Text>
+            </TouchableOpacity>
+
+            {/* <TouchableOpacity
             className="text-center flex-1 items-center"
             onPress={() => handleTabChange("Collections")}
           >
@@ -269,168 +271,169 @@ export default function SearchMarketplace() {
               Creators
             </Text>
           </TouchableOpacity> */}
+          </View>
         </View>
+
+        {/* Overlay */}
+        {isSidebarOpen && (
+          <TouchableWithoutFeedback onPress={closeSidebar}>
+            <Animated.View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: "black",
+                opacity: overlayOpacity,
+              }}
+            />
+          </TouchableWithoutFeedback>
+        )}
+
+        {/* Sidebar */}
+        <Animated.ScrollView
+          style={[
+            sidebarStyles,
+            {
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "70%",
+              backgroundColor: "white",
+              zIndex: 100,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+            },
+          ]}
+        >
+          <View className="w-full h-full p-10 px-5 pt-5">
+            <ScrollView>
+              <View className="flex justify-between items-center flex-row border-b border-gray-200 pb-3">
+                <Text className="font-semibold text-lg">Filters</Text>
+                <TouchableOpacity
+                  onPress={closeSidebar}
+                  className="rounded-full bg-gray-100 p-1"
+                  activeOpacity={0.2}
+                >
+                  <Feather name="x" size={20} color="#777" />
+                </TouchableOpacity>
+              </View>
+
+              <View className="py-3 flex flex-col gap-3">
+                <View>
+                  <Text className="font-semibold text-base text-gray-800 mb-2">
+                    Category
+                  </Text>
+                  <Dropdown
+                    style={[
+                      styles.dropdown,
+                      isFocus && {
+                        borderColor: "rgb(120,82,243)",
+                        borderWidth: 2,
+                      },
+                    ]}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    inputSearchStyle={styles.inputSearchStyle}
+                    iconStyle={styles.iconStyle}
+                    data={categories}
+                    // search
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select Category"
+                    searchPlaceholder="Select Category"
+                    value={value}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    onChange={(item) => {
+                      setValue(item);
+                      setIsFocus(false);
+                    }}
+                    renderLeftIcon={() => (
+                      <AntDesign
+                        style={styles.icon}
+                        color={isFocus ? "rgb(120,82,243)" : "black"}
+                        name="Safety"
+                        size={20}
+                      />
+                    )}
+                  />
+                </View>
+
+                <View>
+                  <View className="flex justify-between items-center flex-row mb-3">
+                    <Text className="font-semibold text-base text-gray-800">
+                      Price
+                    </Text>
+                    <View className="flex items-center gap-1 flex-row">
+                      <Text className="text-xs text-gray-500">Currency</Text>
+                      <Text>ETH</Text>
+                      <Image
+                        source={require("../assets/nfts/eth.png")}
+                        alt=""
+                        className="w-4 h-4"
+                        resizeMode="contain"
+                      />
+                    </View>
+                  </View>
+
+                  <View className="flex gap-2 items-center justify-between flex-row">
+                    <View className="relative flex-1">
+                      <TextInput
+                        type="number"
+                        className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
+                        placeholder="Min"
+                        min={0}
+                      />
+                    </View>
+
+                    <Text className="font-semibold text-gray-800">to</Text>
+
+                    <View className="relative flex-1">
+                      <TextInput
+                        type="number"
+                        className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
+                        placeholder="Max"
+                        min={0}
+                      />
+                    </View>
+                  </View>
+                </View>
+
+                <View>
+                  <View className="mb-3">
+                    <Text className="font-semibold text-base text-gray-800">
+                      Media Type
+                    </Text>
+                  </View>
+
+                  <View className="flex gap-2 items-center justify-between flex-row">
+                    <TouchableOpacity type="number" className="flex-1">
+                      <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                        All
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity type="number" className="flex-1">
+                      <Text className="text-white text-center font-medium p-3.5 border-nft-primary-light bg-nft-primary-light border-2 rounded-xl">
+                        Image
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity type="number" className="flex-1">
+                      <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                        Video
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+          </View>
+        </Animated.ScrollView>
+
+        <ScrollView className="px-3">
+          {activeTab === "NFTs" ? <NFTTab /> : <CollectionTab />}
+        </ScrollView>
       </View>
-
-      {/* Overlay */}
-      {isSidebarOpen && (
-        <TouchableWithoutFeedback onPress={closeSidebar}>
-          <Animated.View
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              backgroundColor: "black",
-              opacity: overlayOpacity,
-            }}
-          />
-        </TouchableWithoutFeedback>
-      )}
-
-      {/* Sidebar */}
-      <Animated.ScrollView
-        style={[
-          sidebarStyles,
-          {
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            height: "70%",
-            backgroundColor: "white",
-            zIndex: 100,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-          },
-        ]}
-      >
-        <View className="w-full h-full p-10 px-5 pt-5">
-          <ScrollView>
-            <View className="flex justify-between items-center flex-row border-b border-gray-200 pb-3">
-              <Text className="font-semibold text-lg">Filters</Text>
-              <TouchableOpacity
-                onPress={closeSidebar}
-                className="rounded-full bg-gray-100 p-1"
-                activeOpacity={0.2}
-              >
-                <Feather name="x" size={20} color="#777" />
-              </TouchableOpacity>
-            </View>
-
-            <View className="py-3 flex flex-col gap-3">
-              <View>
-                <Text className="font-semibold text-base text-gray-800 mb-2">
-                  Category
-                </Text>
-                <Dropdown
-                  style={[
-                    styles.dropdown,
-                    isFocus && {
-                      borderColor: "rgb(120,82,243)",
-                      borderWidth: 2,
-                    },
-                  ]}
-                  placeholderStyle={styles.placeholderStyle}
-                  selectedTextStyle={styles.selectedTextStyle}
-                  inputSearchStyle={styles.inputSearchStyle}
-                  iconStyle={styles.iconStyle}
-                  data={categories}
-                  // search
-                  maxHeight={300}
-                  labelField="label"
-                  valueField="value"
-                  placeholder="Select Category"
-                  searchPlaceholder="Select Category"
-                  value={value}
-                  onFocus={() => setIsFocus(true)}
-                  onBlur={() => setIsFocus(false)}
-                  onChange={(item) => {
-                    setValue(item);
-                    setIsFocus(false);
-                  }}
-                  renderLeftIcon={() => (
-                    <AntDesign
-                      style={styles.icon}
-                      color={isFocus ? "rgb(120,82,243)" : "black"}
-                      name="Safety"
-                      size={20}
-                    />
-                  )}
-                />
-              </View>
-
-              <View>
-                <View className="flex justify-between items-center flex-row mb-3">
-                  <Text className="font-semibold text-base text-gray-800">
-                    Price
-                  </Text>
-                  <View className="flex items-center gap-1 flex-row">
-                    <Text className="text-xs text-gray-500">Currency</Text>
-                    <Text>ETH</Text>
-                    <Image
-                      source={require("../assets/nfts/eth.png")}
-                      alt=""
-                      className="w-4 h-4"
-                      resizeMode="contain"
-                    />
-                  </View>
-                </View>
-
-                <View className="flex gap-2 items-center justify-between flex-row">
-                  <View className="relative flex-1">
-                    <TextInput
-                      type="number"
-                      className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
-                      placeholder="Min"
-                      min={0}
-                    />
-                  </View>
-
-                  <Text className="font-semibold text-gray-800">to</Text>
-
-                  <View className="relative flex-1">
-                    <TextInput
-                      type="number"
-                      className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
-                      placeholder="Max"
-                      min={0}
-                    />
-                  </View>
-                </View>
-              </View>
-
-              <View>
-                <View className="mb-3">
-                  <Text className="font-semibold text-base text-gray-800">
-                    Media Type
-                  </Text>
-                </View>
-
-                <View className="flex gap-2 items-center justify-between flex-row">
-                  <TouchableOpacity type="number" className="flex-1">
-                    <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
-                      All
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity type="number" className="flex-1">
-                    <Text className="text-white text-center font-medium p-3.5 border-nft-primary-light bg-nft-primary-light border-2 rounded-xl">
-                      Image
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity type="number" className="flex-1">
-                    <Text className="text-gray-800 text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
-                      Video
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </ScrollView>
-        </View>
-      </Animated.ScrollView>
-
-      <ScrollView className="px-3">
-        {activeTab === "NFTs" ? <NFTTab /> : <CollectionTab />}
-      </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 

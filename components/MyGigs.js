@@ -18,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { useAuth } from "../pages/redux/AuthContext";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MyGigs() {
   const navigation = useNavigation();
@@ -134,207 +135,209 @@ export default function MyGigs() {
   };
 
   return (
-    <View className="flex-1 bg-white pt-7 pb-0">
-      {/* Top Bar */}
-      <View className="flex-col p-4 pt-0">
-        <View className="flex-row items-center justify-start gap-4">
-          <Text className="text-2xl font-bold text-gray-800">Your Gigs</Text>
-        </View>
-
-        <View className="flex flex-row items-center gap-3 mt-1">
-          <View className="flex-1 relative">
-            <TextInput
-              className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
-              placeholder="Search..."
-              placeholderTextColor="rgb(156 163 175)"
-              value={searchQuery}
-              onChangeText={(text) => setSearchQuery(text)}
-            />
-            <View className="absolute top-3.5 right-2 block">
-              <AntDesign
-                name="search1"
-                size={24}
-                color="border-color: rgb(209 213 219)"
-              />
-            </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View className="flex-1 bg-white">
+        {/* Top Bar */}
+        <View className="flex-col p-4 pt-0">
+          <View className="flex-row items-center justify-start gap-4">
+            <Text className="text-2xl font-bold text-gray-800">Your Gigs</Text>
           </View>
-          <TouchableOpacity
-            onPress={isSidebarOpen ? closeSidebar : openSidebar}
-            className="bg-gray-100 p-4 rounded-xl"
-          >
-            <Ionicons name="filter-outline" size={24} color="#333" />
-          </TouchableOpacity>
-        </View>
-      </View>
 
-      {/* Overlay */}
-      {isSidebarOpen && (
-        <TouchableWithoutFeedback onPress={closeSidebar}>
-          <Animated.View
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              backgroundColor: "black",
-              opacity: overlayOpacity,
-            }}
-          />
-        </TouchableWithoutFeedback>
-      )}
-
-      {/* Sidebar */}
-      <Animated.ScrollView
-        style={[
-          sidebarStyles,
-          {
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            height: "70%",
-            backgroundColor: "white",
-            zIndex: 100,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-          },
-        ]}
-      >
-        <View className="w-full h-full p-10 px-5 pt-5">
-          <ScrollView>
-            <View className="flex justify-between items-center flex-row border-b border-gray-200 pb-3">
-              <Text className="font-semibold text-lg">Filters</Text>
-              <TouchableOpacity
-                onPress={closeSidebar}
-                className="rounded-full bg-gray-100 p-1"
-                activeOpacity={0.2}
-              >
-                <Feather name="x" size={20} color="#777" />
-              </TouchableOpacity>
-            </View>
-
-            <View className="py-3 flex flex-col gap-3">
-              <View>
-                <Text className="font-semibold text-base text-gray-800 mb-2">
-                  Category
-                </Text>
-                <Dropdown
-                  style={[
-                    styles.dropdown,
-                    isFocus && {
-                      borderColor: "rgb(120,82,243)",
-                      borderWidth: 2,
-                    },
-                  ]}
-                  placeholderStyle={styles.placeholderStyle}
-                  selectedTextStyle={styles.selectedTextStyle}
-                  inputSearchStyle={styles.inputSearchStyle}
-                  iconStyle={styles.iconStyle}
-                  data={categories}
-                  // search
-                  maxHeight={300}
-                  labelField="label"
-                  valueField="value"
-                  placeholder="Select Category"
-                  searchPlaceholder="Select Category"
-                  value={value}
-                  onFocus={() => setIsFocus(true)}
-                  onBlur={() => setIsFocus(false)}
-                  onChange={(item) => {
-                    setValue(item);
-                    setIsFocus(false);
-                  }}
-                  renderLeftIcon={() => (
-                    <AntDesign
-                      style={styles.icon}
-                      color={isFocus ? "rgb(120,82,243)" : "black"}
-                      name="Safety"
-                      size={20}
-                    />
-                  )}
+          <View className="flex flex-row items-center gap-3 mt-1">
+            <View className="flex-1 relative">
+              <TextInput
+                className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
+                placeholder="Search..."
+                placeholderTextColor="rgb(156 163 175)"
+                value={searchQuery}
+                onChangeText={(text) => setSearchQuery(text)}
+              />
+              <View className="absolute top-3.5 right-2 block">
+                <AntDesign
+                  name="search1"
+                  size={24}
+                  color="border-color: rgb(209 213 219)"
                 />
               </View>
             </View>
-          </ScrollView>
-        </View>
-      </Animated.ScrollView>
-
-      <ScrollView className="px-3">
-        <View className="flex flex-row flex-wrap items-start">
-          {filteredGigs.map((gig, index) => (
             <TouchableOpacity
-              onPress={() => gigDetails(gig._id)}
-              className=""
-              style={{ width: "50%" }}
-              key={index}
+              onPress={isSidebarOpen ? closeSidebar : openSidebar}
+              className="bg-gray-100 p-4 rounded-xl"
             >
-              <View className="w-40 m-3">
-                <View
-                  className="rounded-xl shadow-xl bg-white"
-                  style={{
-                    backgroundColor: "#fff",
-                    shadowColor: "#999",
-                    shadowOffset: { width: 10, height: 2 },
-                    shadowOpacity: 0.3,
-                    shadowRadius: 4,
-                    elevation: 10,
-                  }}
+              <Ionicons name="filter-outline" size={24} color="#333" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Overlay */}
+        {isSidebarOpen && (
+          <TouchableWithoutFeedback onPress={closeSidebar}>
+            <Animated.View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: "black",
+                opacity: overlayOpacity,
+              }}
+            />
+          </TouchableWithoutFeedback>
+        )}
+
+        {/* Sidebar */}
+        <Animated.ScrollView
+          style={[
+            sidebarStyles,
+            {
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "70%",
+              backgroundColor: "white",
+              zIndex: 100,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+            },
+          ]}
+        >
+          <View className="w-full h-full p-10 px-5 pt-5">
+            <ScrollView>
+              <View className="flex justify-between items-center flex-row border-b border-gray-200 pb-3">
+                <Text className="font-semibold text-lg">Filters</Text>
+                <TouchableOpacity
+                  onPress={closeSidebar}
+                  className="rounded-full bg-gray-100 p-1"
+                  activeOpacity={0.2}
                 >
-                  <View className="relative">
-                    <Image
-                      source={{
-                        uri: gig["images"][0],
-                      }}
-                      className="w-full object-cover h-40 rounded-t-2xl rounded-b-2xl"
-                    />
-                    <TouchableOpacity className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
+                  <Feather name="x" size={20} color="#777" />
+                </TouchableOpacity>
+              </View>
+
+              <View className="py-3 flex flex-col gap-3">
+                <View>
+                  <Text className="font-semibold text-base text-gray-800 mb-2">
+                    Category
+                  </Text>
+                  <Dropdown
+                    style={[
+                      styles.dropdown,
+                      isFocus && {
+                        borderColor: "rgb(120,82,243)",
+                        borderWidth: 2,
+                      },
+                    ]}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    inputSearchStyle={styles.inputSearchStyle}
+                    iconStyle={styles.iconStyle}
+                    data={categories}
+                    // search
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Select Category"
+                    searchPlaceholder="Select Category"
+                    value={value}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    onChange={(item) => {
+                      setValue(item);
+                      setIsFocus(false);
+                    }}
+                    renderLeftIcon={() => (
                       <AntDesign
-                        name="heart"
-                        size={14}
-                        color="rgb(120,82,243)"
+                        style={styles.icon}
+                        color={isFocus ? "rgb(120,82,243)" : "black"}
+                        name="Safety"
+                        size={20}
                       />
-                      <Text className="text-nft-primary-light ml-1 font-bold text-sm">
-                        {0}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                    )}
+                  />
+                </View>
+              </View>
+            </ScrollView>
+          </View>
+        </Animated.ScrollView>
 
-                  <View className="p-2 pt-1">
-                    <Text className="mb-2 font-medium text-base text-gray-800">
-                      {gig["title"].substring(0, 35)}..
-                    </Text>
-
-                    <View className="flex justify-between flex-row items-center">
-                      <View className="flex flex-row items-center gap-1">
-                        <Image
-                          source={{
-                            uri: gig["user"]["avatar"],
-                          }}
-                          className="w-10 h-10 object-cover rounded-full"
+        <ScrollView className="px-3">
+          <View className="flex flex-row flex-wrap items-start">
+            {filteredGigs.map((gig, index) => (
+              <TouchableOpacity
+                onPress={() => gigDetails(gig._id)}
+                className=""
+                style={{ width: "50%" }}
+                key={index}
+              >
+                <View className="w-40 m-3">
+                  <View
+                    className="rounded-xl shadow-xl bg-white"
+                    style={{
+                      backgroundColor: "#fff",
+                      shadowColor: "#999",
+                      shadowOffset: { width: 10, height: 2 },
+                      shadowOpacity: 0.3,
+                      shadowRadius: 4,
+                      elevation: 10,
+                    }}
+                  >
+                    <View className="relative">
+                      <Image
+                        source={{
+                          uri: gig["images"][0],
+                        }}
+                        className="w-full object-cover h-40 rounded-t-2xl rounded-b-2xl"
+                      />
+                      <TouchableOpacity className="absolute top-2 right-2 bg-white rounded-xl p-2 flex flex-row items-center justify-center">
+                        <AntDesign
+                          name="heart"
+                          size={14}
+                          color="rgb(120,82,243)"
                         />
-                        <View className="flex flex-col justify-start items-center">
-                          <Text className="text-gray-800 font-semibold text-left w-full text-xs">
-                            {gig["user"]["username"]}
+                        <Text className="text-nft-primary-light ml-1 font-bold text-sm">
+                          {0}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <View className="p-2 pt-1">
+                      <Text className="mb-2 font-medium text-base text-gray-800">
+                        {gig["title"].substring(0, 35)}..
+                      </Text>
+
+                      <View className="flex justify-between flex-row items-center">
+                        <View className="flex flex-row items-center gap-1">
+                          <Image
+                            source={{
+                              uri: gig["user"]["avatar"],
+                            }}
+                            className="w-10 h-10 object-cover rounded-full"
+                          />
+                          <View className="flex flex-col justify-start items-center">
+                            <Text className="text-gray-800 font-semibold text-left w-full text-xs">
+                              {gig["user"]["username"]}
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+
+                      <View className="flex flex-row items-end gap-1 ">
+                        <View className="flex items-center justify-start gap-1 flex-row">
+                          <Text className="text-base font-bold pt-2">
+                            <Text className="text-xs font-normal text-gray-500">
+                              starts from
+                            </Text>{" "}
+                            ${gig["packages"]["basic"]["price"]}
                           </Text>
                         </View>
                       </View>
                     </View>
-
-                    <View className="flex flex-row items-end gap-1 ">
-                      <View className="flex items-center justify-start gap-1 flex-row">
-                        <Text className="text-base font-bold pt-2">
-                          <Text className="text-xs font-normal text-gray-500">
-                            starts from
-                          </Text>{" "}
-                          ${gig["packages"]["basic"]["price"]}
-                        </Text>
-                      </View>
-                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
-    </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
 
