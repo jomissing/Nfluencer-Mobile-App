@@ -197,7 +197,7 @@ export default function SearchMarketplace() {
   return (
     <View className="flex-1 bg-white pt-7 pb-0">
       {/* Top Bar */}
-      <View className="flex-col p-4">
+      <View className="flex-col p-4 pt-0">
         <View className="flex-row items-center justify-start gap-4">
           <TouchableOpacity onPress={() => navigation.goBack("Marketplace")}>
             <AntDesign name="arrowleft" size={24} color="#333" />

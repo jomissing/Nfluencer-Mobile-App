@@ -59,7 +59,7 @@ export default function Inbox() {
   return (
     <View className="flex-1 bg-white pt-7">
       {/* Top Bar */}
-      <View className="flex flex-row justify-between items-center p-4 pb-0">
+      <View className="flex flex-row justify-between items-center p-4 pb-0 pt-0">
         <Text className="text-2xl font-bold text-gray-800">Inbox</Text>
         <TouchableOpacity>
           <AntDesign name="filter" size={24} color="#333" />
@@ -95,6 +95,9 @@ export default function Inbox() {
             <View className="flex-1 items-start">
               <Text className="text-base font-bold text-gray-800">
                 {user.name}
+              </Text>
+              <Text className="text-xs font-normal text-gray-400">
+                @{user.username}
               </Text>
             </View>
           </TouchableOpacity>

@@ -211,7 +211,7 @@ export default function Marketplace() {
   return (
     <View className="flex-1 bg-white pt-7 pb-5">
       {/* Top Bar */}
-      <View className="flex-row justify-between items-center p-4">
+      <View className="flex-row justify-between items-center p-4 pt-0">
         <View className="flex-1 flex-row items-center justify-start">
           <Text className="text-2xl font-bold text-gray-800">
             NFT Marketplace

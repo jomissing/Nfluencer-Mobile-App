@@ -7,13 +7,14 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "./redux/AuthContext";
 import { io } from "socket.io-client";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { useRoute } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const messagesData = [
   {
@@ -233,6 +234,8 @@ export default function Chat() {
   const sendMessage = (e) => {
     e.preventDefault();
 
+    if (!newMessage.trim()) return;
+
     socket.emit("message", {
       text: newMessage,
       sender: userDetails._id,
@@ -258,93 +261,92 @@ export default function Chat() {
   }
 
   return (
-    <View className="flex-1 bg-white pt-7">
-      {/* Top Bar */}
-      <View className="flex-row justify-between items-center px-4">
-        <View className="flex-1 flex-row items-center justify-start py-3">
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="arrow-left" size={24} color="#333" />
-          </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View className="flex-1 bg-white pt-0">
+        {/* Top Bar */}
+        <View className="flex-row justify-between items-center px-4 pt-0 bg-nft-primary-light">
+          <View className="flex-1 flex-row items-center justify-start py-3">
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="arrow-left" size={24} color="#fff" />
+            </TouchableOpacity>
 
-          <View className="flex flex-col justify-start px-4">
-            <Text style={{ fontSize: 18, fontWeight: "bold", color: "#333" }}>
-              {selectedUser.name}
-            </Text>
-            <Text style={{ fontSize: 12, color: "#999" }}>
-              Last seen 2d ago
-            </Text>
-          </View>
-        </View>
-
-        <View>
-          <TouchableOpacity>
-            <Feather name="more-vertical" size={24} color="#333" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* Chat Area */}
-      <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: 0 }}>
-        {messages.map((message, index) => (
-          <View
-            key={index}
-            style={{
-              flexDirection: "row",
-              alignItems: "flex-start",
-              marginVertical: 8,
-            }}
-          >
-            <Image
-              source={{
-                uri:
-                  userDetails._id === message.receiver
-                    ? selectedUser.avatar
-                    : userDetails.avatar,
-              }}
-              style={{
-                width: 35,
-                height: 35,
-                borderRadius: 20,
-                marginRight: 5,
-              }}
-            />
-            <View style={{ flex: 1 }}>
-              <View className="flex-1 flex-row items-center gap-4">
-                <Text
-                  style={{ fontSize: 14, fontWeight: "bold", color: "#333" }}
-                >
-                  {userDetails._id === message.receiver
-                    ? selectedUser.username
-                    : userDetails.username}
-                </Text>
-                <Text style={{ color: "#999" }}>
-                  {formatDate(message.createdAt)}
-                </Text>
-              </View>
-              <Text className="text-gray-800">{message.text}</Text>
+            <View className="flex flex-col justify-start px-4">
+              <Text style={{ fontSize: 18, fontWeight: "bold", color: "#fff" }}>
+                {selectedUser.name}
+              </Text>
+              <Text style={{ fontSize: 12, color: "#fff" }}>
+                Last seen 2d ago
+              </Text>
             </View>
           </View>
-        ))}
-      </ScrollView>
 
-      {/* Message Input Area */}
-      <View className="flex-row justify-between items-center py-3 px-2 pt-0 flex">
-        <TextInput
-          className="flex-1 h-auto border-t border-t-gray-100 p-4 pt-2 pb-2"
-          placeholder="Type a message..."
-          textAlignVertical="top"
-          multiline={true}
-          placeholderTextColor="#ccc"
-          value={newMessage}
-          onChangeText={(text) => setNewMessage(text)}
-        />
-        <TouchableOpacity
-          onPress={sendMessage}
-          className="py-4 px-6 rounded-xl bg-nft-primary-light"
-        >
-          <Text className="text-white font-bold">Send</Text>
-        </TouchableOpacity>
+          <View>
+            <TouchableOpacity>
+              <Feather name="more-vertical" size={24} color="#fff" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Chat Area */}
+        <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: 0 }}>
+          {messages.map((message, index) => (
+            <View
+              key={index}
+              style={{
+                flexDirection: "row",
+                alignItems: "flex-start",
+                marginVertical: 8,
+              }}
+            >
+              <Image
+                source={{
+                  uri:
+                    userDetails._id === message.receiver
+                      ? selectedUser.avatar
+                      : userDetails.avatar,
+                }}
+                style={{
+                  width: 35,
+                  height: 35,
+                  borderRadius: 20,
+                  marginRight: 5,
+                }}
+              />
+              <View style={{ flex: 1 }}>
+                <View className="flex-1 flex-row items-center gap-4">
+                  <Text
+                    style={{ fontSize: 14, fontWeight: "bold", color: "#333" }}
+                  >
+                    {userDetails._id === message.receiver
+                      ? selectedUser.username
+                      : userDetails.username}
+                  </Text>
+                  <Text style={{ color: "#999" }}>
+                    {formatDate(message.createdAt)}
+                  </Text>
+                </View>
+                <Text className="text-gray-800">{message.text}</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+
+        {/* Message Input Area */}
+        <View className="flex-row justify-between items-center py-4 px-2 flex border-t border-t-gray-100 bg-gray-50 shadow-lg">
+          <TextInput
+            className="flex-1 h-auto max-h-28 font-semibold"
+            placeholder="Type a message..."
+            textAlignVertical="top"
+            multiline={true}
+            placeholderTextColor="#aaa"
+            value={newMessage}
+            onChangeText={(text) => setNewMessage(text)}
+          />
+          <TouchableOpacity onPress={sendMessage} className="rounded-xl">
+            <Ionicons name="send" size={24} color="#9375f5" />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

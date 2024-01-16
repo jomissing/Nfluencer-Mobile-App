@@ -136,7 +136,7 @@ export default function MyGigs() {
   return (
     <View className="flex-1 bg-white pt-7 pb-0">
       {/* Top Bar */}
-      <View className="flex-col p-4">
+      <View className="flex-col p-4 pt-0">
         <View className="flex-row items-center justify-start gap-4">
           <Text className="text-2xl font-bold text-gray-800">Your Gigs</Text>
         </View>
