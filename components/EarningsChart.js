@@ -2,7 +2,7 @@ import React from "react";
 import { View, Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 
-const EarningsChart = ({ chartData }) => {
+const EarningsChart = ({ chartData, isDarkMode }) => {
   const data = {
     labels: [
       "Jan",
@@ -32,9 +32,9 @@ const EarningsChart = ({ chartData }) => {
         width={Dimensions.get("window").width}
         height={200}
         chartConfig={{
-          backgroundColor: "#fff",
-          backgroundGradientFrom: "#fff",
-          backgroundGradientTo: "#fff",
+          backgroundColor: isDarkMode ? "#24293e" : "#fff",
+          backgroundGradientFrom: isDarkMode ? "#24293e" : "#fff",
+          backgroundGradientTo: isDarkMode ? "#24293e" : "#fff",
           fillShadowGradientOpacity: 1,
           fillShadowGradientToOpacity: 0.5,
           decimalPlaces: 0,

@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function NFTTab({ navigation }) {
+export default function NFTTab({ navigation, isDarkMode }) {
   const NFTs = [
     {
       name: "NFT Name Here",
@@ -108,10 +108,9 @@ export default function NFTTab({ navigation }) {
         >
           <View className="w-40 m-3">
             <View
-              className="rounded-xl shadow-xl bg-white"
+              className="rounded-xl shadow-xl bg-white dark:bg-[#24293e]"
               style={{
-                backgroundColor: "#fff",
-                shadowColor: "#999",
+                shadowColor: isDarkMode ? "#000" : "#999",
                 shadowOffset: { width: 10, height: 2 },
                 shadowOpacity: 0.3,
                 shadowRadius: 4,
@@ -145,7 +144,7 @@ export default function NFTTab({ navigation }) {
               </View>
 
               <View className="p-2 pt-1">
-                <Text className="mb-2 font-medium text-base text-gray-800">
+                <Text className="mb-2 font-medium text-base text-gray-800 dark:text-white">
                   {nft.name}
                 </Text>
 
@@ -156,7 +155,7 @@ export default function NFTTab({ navigation }) {
                       className="w-8 h-8 object-cover rounded-full"
                     />
                     <View className="flex flex-col justify-start items-center">
-                      <Text className="text-gray-800 font-semibold text-left w-full text-xs">
+                      <Text className="text-gray-800 dark:text-white font-semibold text-left w-full text-xs">
                         {nft.creator.username}
                       </Text>
                       <Text className="text-gray-500 text-xs text-left w-full">
@@ -173,7 +172,9 @@ export default function NFTTab({ navigation }) {
                       className="w-5 h-5 object-contain"
                       style={{ resizeMode: "contain" }}
                     />
-                    <Text className="text-base font-bold">0.49 ETH</Text>
+                    <Text className="text-base font-bold dark:text-white">
+                      0.49 ETH
+                    </Text>
                   </View>
                   <Text className="text-xs text-gray-500">$13.54</Text>
                 </View>

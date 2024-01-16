@@ -4,8 +4,6 @@ import {
   Feather,
   AntDesign,
   MaterialIcons,
-  Octicons,
-  SimpleLineIcons,
   MaterialCommunityIcons,
   Ionicons,
 } from "@expo/vector-icons";
@@ -14,11 +12,12 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 export default function GigDetails() {
   const navigation = useNavigation();
   const APP_API_URL = Constants.manifest.extra.APP_API_URL;
-
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const route = useRoute();
   const { gig_id } = route.params;
   const [gig, setGig] = useState(null);
@@ -85,13 +84,17 @@ export default function GigDetails() {
       </View>
     );
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white relative">
+    <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         <ScrollView>
           <View className="flex-col p-4 pb-0">
             <View className="flex-row items-center justify-start gap-4">
               <TouchableOpacity onPress={() => navigation.goBack("Services")}>
-                <AntDesign name="arrowleft" size={24} color="#333" />
+                <AntDesign
+                  name="arrowleft"
+                  size={24}
+                  color={isDarkMode ? "#fff" : "#333"}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -112,7 +115,7 @@ export default function GigDetails() {
           </View>
 
           <View className="p-4 pt-0 mb-36">
-            <Text className="mb-2 font-medium text-2xl text-gray-800">
+            <Text className="mb-2 font-medium text-2xl text-gray-800 dark:text-white">
               {gig?.title}
             </Text>
 
@@ -129,7 +132,7 @@ export default function GigDetails() {
                     className="w-12 h-12 object-cover rounded-full"
                   />
                   <View className="flex flex-col justify-start items-center">
-                    <Text className="text-gray-800 font-semibold text-left w-full">
+                    <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                       {gig.user.name}
                     </Text>
                     <Text className="text-gray-500 text-xs text-left w-full">
@@ -149,7 +152,7 @@ export default function GigDetails() {
                     />
                   </View>
                   <View className="flex flex-col justify-start items-center">
-                    <Text className="text-gray-800 font-semibold text-left w-full">
+                    <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                       Category
                     </Text>
                     <Text className="text-gray-500 text-xs text-left w-full">
@@ -162,16 +165,18 @@ export default function GigDetails() {
 
             {/* keywords */}
             <View className="my-3">
-              <Text className="text-gray-800 font-semibold text-left w-full">
+              <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                 Keywords
               </Text>
               <View className="flex flex-row flex-wrap gap-2 mt-[1px]">
                 {gig.keywords.map((keyword, index) => (
                   <View
-                    className="bg-gray-100 px-2 py-1 rounded-full"
+                    className="bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded-full"
                     key={index}
                   >
-                    <Text className="text-xs text-gray-500">{keyword}</Text>
+                    <Text className="text-xs text-gray-500 dark:text-gray-300">
+                      {keyword}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -185,10 +190,10 @@ export default function GigDetails() {
                       <Ionicons
                         name="newspaper-outline"
                         size={24}
-                        color="black"
+                        color={isDarkMode ? "#fff" : "black"}
                       />
                     </View>
-                    <Text className="font-medium text-2xl text-gray-800">
+                    <Text className="font-medium text-2xl text-gray-800 dark:text-white">
                       Description
                     </Text>
                   </View>
@@ -198,7 +203,13 @@ export default function GigDetails() {
                       ref={webViewRef}
                       originWhitelist={["*"]}
                       source={{
-                        html: `<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><div style="color: rgb(107 114 128 / 1);font-size: 0.875rem;line-height: 1.25rem">${gig?.description}</div></body></html>`,
+                        html: `<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body style="background-color:${
+                          isDarkMode ? "#24293e" : "white"
+                        }"><div style="color: ${
+                          isDarkMode ? "#eee" : "rgb(107 114 128 / 1)"
+                        };font-size: 0.875rem;line-height: 1.25rem">${
+                          gig?.description
+                        }</div></body></html>`,
                       }}
                       style={{
                         flex: 1,
@@ -217,42 +228,48 @@ export default function GigDetails() {
                       <MaterialCommunityIcons
                         name="cube-scan"
                         size={24}
-                        color="black"
+                        color={isDarkMode ? "#fff" : "black"}
                       />
                     </View>
-                    <Text className="font-medium text-2xl text-gray-800">
+                    <Text className="font-medium text-2xl text-gray-800 dark:text-white">
                       Pricing
                     </Text>
                   </View>
 
                   <View className="flex flex-row justify-between gap-5">
                     <View className="items-center">
-                      <Text className="text-lg font-semibold">
+                      <Text className="text-lg font-semibold dark:text-white">
                         {gig.packages.basic.name}
                       </Text>
                       <View>
-                        <Text>${gig.packages.basic.price}</Text>
+                        <Text className="dark:text-white">
+                          ${gig.packages.basic.price}
+                        </Text>
                       </View>
                     </View>
 
                     {gig.offer3Packages && (
                       <View className="items-center">
-                        <Text className="text-lg font-semibold">
+                        <Text className="text-lg font-semibold dark:text-white">
                           {gig.packages.standard.name}
                         </Text>
                         <View>
-                          <Text>${gig.packages.standard.price}</Text>
+                          <Text className="dark:text-white">
+                            ${gig.packages.standard.price}
+                          </Text>
                         </View>
                       </View>
                     )}
 
                     {gig.offer3Packages && (
                       <View className="items-center">
-                        <Text className="text-lg font-semibold">
+                        <Text className="text-lg font-semibold dark:text-white">
                           {gig.packages.premium.name}
                         </Text>
                         <View>
-                          <Text>${gig.packages.premium.price}</Text>
+                          <Text className="dark:text-white">
+                            ${gig.packages.premium.price}
+                          </Text>
                         </View>
                       </View>
                     )}
@@ -262,9 +279,13 @@ export default function GigDetails() {
                 <View>
                   <View className="mb-3 mt-2 flex-1 flex-row items-center space-x-3">
                     <View>
-                      <Feather name="activity" size={24} color="black" />
+                      <Feather
+                        name="activity"
+                        size={24}
+                        color={isDarkMode ? "#fff" : "black"}
+                      />
                     </View>
-                    <Text className="font-medium text-2xl text-gray-800">
+                    <Text className="font-medium text-2xl text-gray-800 dark:text-white">
                       Reviews
                     </Text>
                   </View>
@@ -283,7 +304,7 @@ export default function GigDetails() {
                         />
 
                         <View>
-                          <Text className="text-gray-800 font-semibold text-left w-full">
+                          <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                             {review.buyer.name}
                           </Text>
                           <Text className="text-gray-500 text-xs text-left w-full">
@@ -295,7 +316,9 @@ export default function GigDetails() {
                             {review.rating}
                           </Text>
 
-                          <Text>{review.reviewText}</Text>
+                          <Text className="dark:text-white">
+                            {review.reviewText}
+                          </Text>
                         </View>
                       </View>
                     ))}
@@ -308,10 +331,10 @@ export default function GigDetails() {
                       <AntDesign
                         name="questioncircleo"
                         size={24}
-                        color="black"
+                        color={isDarkMode ? "#fff" : "black"}
                       />
                     </View>
-                    <Text className="font-medium text-2xl text-gray-800">
+                    <Text className="font-medium text-2xl text-gray-800 dark:text-white">
                       FAQs
                     </Text>
                   </View>
@@ -323,10 +346,10 @@ export default function GigDetails() {
                         key={index}
                       >
                         <View className="w-full">
-                          <Text className="text-gray-800 font-semibold text-left w-full">
+                          <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                             {faq.question}
                           </Text>
-                          <Text className="text-gray-500 text-xs w-full">
+                          <Text className="text-gray-500 dark:text-gray-400 text-xs w-full">
                             {faq.answer}
                           </Text>
                         </View>

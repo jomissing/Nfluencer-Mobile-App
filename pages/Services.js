@@ -18,11 +18,12 @@ import { useNavigation } from "@react-navigation/native";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 export default function SearchServices() {
   const navigation = useNavigation();
   const APP_API_URL = Constants.manifest.extra.APP_API_URL;
-
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;
 
@@ -130,12 +131,12 @@ export default function SearchServices() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white">
+    <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         {/* Top Bar */}
         <View className="flex-col p-4 pt-0">
           <View className="flex-row items-center justify-start gap-4">
-            <Text className="text-2xl font-bold text-gray-800">
+            <Text className="text-2xl font-bold text-gray-800 dark:text-white">
               Search Services
             </Text>
           </View>
@@ -143,7 +144,7 @@ export default function SearchServices() {
           <View className="flex flex-row items-center gap-3 mt-1">
             <View className="flex-1 relative">
               <TextInput
-                className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
+                className=" text-gray-800 dark:text-white text-base font-normal p-3 bg-white dark:bg-gray-600 border-2 border-gray-300 dark:border-gray-500 rounded-xl"
                 placeholder="Search..."
                 placeholderTextColor="rgb(156 163 175)"
                 value={searchQuery}
@@ -159,9 +160,13 @@ export default function SearchServices() {
             </View>
             <TouchableOpacity
               onPress={isSidebarOpen ? closeSidebar : openSidebar}
-              className="bg-gray-100 p-4 rounded-xl"
+              className="bg-gray-100 dark:bg-gray-600 p-4 rounded-xl"
             >
-              <Ionicons name="filter-outline" size={24} color="#333" />
+              <Ionicons
+                name="filter-outline"
+                size={24}
+                color={isDarkMode ? "rgb(209 213 219)" : "#333"}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -189,7 +194,7 @@ export default function SearchServices() {
               left: 0,
               width: "100%",
               height: "70%",
-              backgroundColor: "white",
+              backgroundColor: isDarkMode ? "#24293e" : "#fff",
               zIndex: 100,
               borderTopLeftRadius: 20,
               borderTopRightRadius: 20,
@@ -198,11 +203,13 @@ export default function SearchServices() {
         >
           <View className="w-full h-full p-10 px-5 pt-5">
             <ScrollView>
-              <View className="flex justify-between items-center flex-row border-b border-gray-200 pb-3">
-                <Text className="font-semibold text-lg">Filters</Text>
+              <View className="flex justify-between items-center flex-row border-b border-gray-200 dark:border-gray-700 pb-3">
+                <Text className="font-semibold text-lg dark:text-white">
+                  Filters
+                </Text>
                 <TouchableOpacity
                   onPress={closeSidebar}
-                  className="rounded-full bg-gray-100 p-1"
+                  className="rounded-full bg-gray-100 dark:dark:bg-gray-600 p-1"
                   activeOpacity={0.2}
                 >
                   <Feather name="x" size={20} color="#777" />
@@ -211,14 +218,14 @@ export default function SearchServices() {
 
               <View className="py-3 flex flex-col gap-3">
                 <View>
-                  <Text className="font-semibold text-base text-gray-800 mb-2">
+                  <Text className="font-semibold text-base text-gray-800 dark:text-white mb-2">
                     Category
                   </Text>
                   <Dropdown
                     style={[
                       styles.dropdown,
                       isFocus && {
-                        borderColor: "rgb(120,82,243)",
+                        borderColor: isDarkMode ? "#888" : "rgb(120,82,243)",
                         borderWidth: 2,
                       },
                     ]}
@@ -268,10 +275,9 @@ export default function SearchServices() {
                   >
                     <View className="w-40 m-3">
                       <View
-                        className="rounded-xl shadow-xl bg-white"
+                        className="rounded-xl shadow-xl bg-white dark:bg-[#24293e]"
                         style={{
-                          backgroundColor: "#fff",
-                          shadowColor: "#999",
+                          shadowColor: isDarkMode ? "#000" : "#999",
                           shadowOffset: { width: 10, height: 2 },
                           shadowOpacity: 0.3,
                           shadowRadius: 4,
@@ -298,7 +304,7 @@ export default function SearchServices() {
                         </View>
 
                         <View className="p-2 pt-1">
-                          <Text className="mb-2 font-medium text-base text-gray-800">
+                          <Text className="mb-2 font-medium text-base text-gray-800 dark:text-white">
                             {gig["title"].substring(0, 35)}..
                           </Text>
 
@@ -311,7 +317,7 @@ export default function SearchServices() {
                                 className="w-10 h-10 object-cover rounded-full"
                               />
                               <View className="flex flex-col justify-start items-center">
-                                <Text className="text-gray-800 font-semibold text-left w-full text-xs">
+                                <Text className="text-gray-800 dark:text-white font-semibold text-left w-full text-xs">
                                   {gig["user"]["username"]}
                                 </Text>
                               </View>
@@ -324,7 +330,9 @@ export default function SearchServices() {
                                 <Text className="text-xs font-normal text-gray-500">
                                   starts from
                                 </Text>{" "}
-                                ${gig["packages"]["basic"]["price"]}
+                                <Text className="text-gray-800 dark:text-white">
+                                  ${gig["packages"]["basic"]["price"]}
+                                </Text>
                               </Text>
                             </View>
                           </View>

@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function CollectionTab({ navigation }) {
+export default function CollectionTab({ navigation, isDarkMode }) {
   const NFTs = [
     {
       name: "NFT Name Here",
@@ -103,10 +103,9 @@ export default function CollectionTab({ navigation }) {
       <View className="flex-1 items-center gap-2 justify-start flex-row overflow-auto p-3 pl-1 pt-0">
         <View className="w-full m-3">
           <View
-            className="rounded-xl shadow-xl bg-white"
+            className="rounded-xl shadow-xl bg-white dark:bg-[#24293e]"
             style={{
-              backgroundColor: "#fff",
-              shadowColor: "#999",
+              shadowColor: isDarkMode ? "#000" : "#999",
               shadowOffset: { width: 10, height: 2 },
               shadowOpacity: 0.3,
               shadowRadius: 4,
@@ -135,7 +134,7 @@ export default function CollectionTab({ navigation }) {
             </View>
 
             <View className="p-3 pt-1">
-              <Text className="mb-2 font-medium text-lg text-gray-800">
+              <Text className="mb-2 font-medium text-lg text-gray-800 dark:text-white">
                 Bored Ape Yacht Club
               </Text>
 
@@ -144,7 +143,7 @@ export default function CollectionTab({ navigation }) {
                   <Text className="text-gray-500 font-normal text-xs w-full text-center">
                     Total Items
                   </Text>
-                  <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                  <Text className="text-gray-800 dark:text-white text-xl w-full font-semibold text-center">
                     10
                   </Text>
                 </View>
@@ -153,7 +152,7 @@ export default function CollectionTab({ navigation }) {
                   <Text className="text-gray-500 font-normal text-xs w-full text-center">
                     Items Sold
                   </Text>
-                  <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                  <Text className="text-gray-800 dark:text-white text-xl w-full font-semibold text-center">
                     34
                   </Text>
                 </View>
@@ -162,7 +161,7 @@ export default function CollectionTab({ navigation }) {
                   <Text className="text-gray-500 font-normal text-xs w-full text-center">
                     Total Sales
                   </Text>
-                  <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                  <Text className="text-gray-800 dark:text-white text-xl w-full font-semibold text-center">
                     0.49 ETH
                   </Text>
                 </View>

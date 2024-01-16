@@ -2,7 +2,7 @@ import React from "react";
 import { View, Dimensions } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 
-const PriceHistory = () => {
+const PriceHistory = ({ isDarkMode }) => {
   // Sample data for demonstration
   const data = {
     labels: ["Jan", "Feb", "Mar"],
@@ -24,8 +24,8 @@ const PriceHistory = () => {
         // yAxisSuffix=" ETH"
         chartConfig={{
           showGrid: false,
-          backgroundGradientFrom: "#fff",
-          backgroundGradientTo: "#fff",
+          backgroundGradientFrom: isDarkMode ? "#24293e" : "#fff",
+          backgroundGradientTo: isDarkMode ? "#24293e" : "#fff",
           fillShadowGradientOpacity: 1,
           fillShadowGradientToOpacity: 0.5,
           barRadius: 3,

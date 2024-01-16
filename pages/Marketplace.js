@@ -1,19 +1,14 @@
 import React from "react";
-import {
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
-import { Feather, AntDesign } from "@expo/vector-icons";
+import { Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Trending from "../components/Trending";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 export default function Marketplace() {
   const navigation = useNavigation();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const categories = [
     {
       id: 4,
@@ -46,7 +41,6 @@ export default function Marketplace() {
       image: require("../assets/nfts/photo.webp"), // Replace with actual image source
     },
   ];
-
   const featuredNFTs = [
     {
       name: "NFT Name Here",
@@ -187,7 +181,6 @@ export default function Marketplace() {
       ],
     },
   ];
-
   const topSellers = [
     {
       name: "Usama MK",
@@ -210,12 +203,12 @@ export default function Marketplace() {
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white">
+    <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         {/* Top Bar */}
         <View className="flex-row justify-between items-center p-4 pt-0">
           <View className="flex-1 flex-row items-center justify-start">
-            <Text className="text-2xl font-bold text-gray-800">
+            <Text className="text-2xl font-bold text-gray-800 dark:text-white">
               NFT Marketplace
             </Text>
           </View>
@@ -224,7 +217,11 @@ export default function Marketplace() {
             <TouchableOpacity
               onPress={() => navigation.navigate("SearchMarketplace")}
             >
-              <AntDesign name="search1" size={24} color="#333" />
+              <AntDesign
+                name="search1"
+                size={24}
+                color={isDarkMode ? "#fff" : "#333"}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -232,9 +229,8 @@ export default function Marketplace() {
         <ScrollView>
           <Trending />
 
-          {/* Chat Area */}
           <ScrollView
-            className="flex-1 bg-white pt-5 px-3"
+            className="flex-1 bg-white dark:bg-[#24293e] pt-5 px-3"
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
@@ -245,7 +241,7 @@ export default function Marketplace() {
                   key={index}
                 >
                   <TouchableOpacity
-                    className="rounded-3xl overflow-hidden border-gray-100 w-20 h-20"
+                    className="rounded-3xl overflow-hidden border-gray-100 dark:border-gray-600 w-20 h-20"
                     style={{ borderWidth: 5 }}
                   >
                     <Image
@@ -262,19 +258,25 @@ export default function Marketplace() {
           </ScrollView>
 
           <View className="flex-1 justify-between items-center flex-row w-full mt-10 px-3">
-            <Text className="text-xl font-bold text-gray-800 flex-1">
+            <Text className="text-xl font-bold text-gray-800 dark:text-white flex-1">
               Featured
             </Text>
 
             <TouchableOpacity className="flex flex-row gap-1 items-center">
-              <Text className="font-semibold underline">See all</Text>
-              <AntDesign name="right" size={20} color="#333" />
+              <Text className="font-semibold underline dark:text-white">
+                See all
+              </Text>
+              <AntDesign
+                name="right"
+                size={20}
+                color={isDarkMode ? "#fff" : "#333"}
+              />
             </TouchableOpacity>
           </View>
 
           {/* Featured NFTs */}
           <ScrollView
-            className="flex-1 bg-white pt-5 px-3"
+            className="flex-1 bg-white dark:bg-[#24293e] pt-5 px-3"
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
@@ -285,10 +287,9 @@ export default function Marketplace() {
               >
                 <View className="w-72 m-3">
                   <View
-                    className="rounded-xl shadow-xl bg-white"
+                    className="rounded-xl shadow-xl bg-white dark:bg-[#24293e]"
                     style={{
-                      backgroundColor: "#fff",
-                      shadowColor: "#999",
+                      shadowColor: isDarkMode ? "#000" : "#999",
                       shadowOffset: { width: 10, height: 2 },
                       shadowOpacity: 0.3,
                       shadowRadius: 4,
@@ -325,7 +326,7 @@ export default function Marketplace() {
                       </View>
 
                       <TouchableOpacity
-                        className="text-nft-primary-light bg-white rounded-full p-2"
+                        className="text-nft-primary-light bg-white rounded-full p-2 dark:bg-[#24293e] dark:text-white"
                         style={{
                           shadowColor: "#000",
                           shadowOffset: { width: 0, height: 2 },
@@ -334,12 +335,16 @@ export default function Marketplace() {
                           elevation: 4,
                         }}
                       >
-                        <AntDesign name="ellipsis1" size={24} color="black" />
+                        <AntDesign
+                          name="ellipsis1"
+                          size={24}
+                          color={isDarkMode ? "#fff" : "black"}
+                        />
                       </TouchableOpacity>
                     </View>
 
                     <View className="p-3 pt-1">
-                      <Text className="mb-2 font-medium text-lg text-gray-800">
+                      <Text className="mb-2 font-medium text-lg text-gray-800 dark:text-white">
                         {nft.name}
                       </Text>
 
@@ -350,7 +355,7 @@ export default function Marketplace() {
                             className="w-12 h-12 object-cover rounded-full"
                           />
                           <View className="flex flex-col justify-start items-center">
-                            <Text className="text-gray-800 font-semibold text-left w-full">
+                            <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                               {nft.creator.username}
                             </Text>
                             <Text className="text-gray-500 text-xs text-left w-full">
@@ -365,7 +370,7 @@ export default function Marketplace() {
                             className="w-12 h-12 object-cover rounded-full"
                           />
                           <View className="flex flex-col justify-start items-center">
-                            <Text className="text-gray-800 font-semibold text-left w-full">
+                            <Text className="text-gray-800 dark:text-white font-semibold text-left w-full">
                               {nft.collection.name.substring(0, 10) + "..."}
                             </Text>
                             <Text className="text-gray-500 text-xs text-left w-full">
@@ -382,14 +387,16 @@ export default function Marketplace() {
                             className="w-7 h-7 object-contain"
                             style={{ resizeMode: "contain" }}
                           />
-                          <Text className="text-xl font-bold">0.49 ETH</Text>
+                          <Text className="text-xl font-bold dark:text-white">
+                            0.49 ETH
+                          </Text>
                         </View>
                         <Text className="text-sm text-gray-500">$13.54</Text>
                       </View>
 
                       <View className="w-full mt-4 flex items-center flex-row gap-x-2">
-                        <TouchableOpacity className="flex items-center justify-center bg-gray-200 rounded-xl p-2 py-3 flex-1">
-                          <Text className="text-gray-500 text-base font-semibold">
+                        <TouchableOpacity className="flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded-xl p-2 py-3 flex-1">
+                          <Text className="text-gray-500 dark:text-gray-400 text-base font-semibold">
                             Save Item
                           </Text>
                         </TouchableOpacity>
@@ -410,13 +417,19 @@ export default function Marketplace() {
           </ScrollView>
 
           <View className="flex-1 justify-between items-center flex-row w-full mt-10 px-3">
-            <Text className="text-xl font-bold text-gray-800 flex-1">
+            <Text className="text-xl font-bold text-gray-800 dark:text-white flex-1">
               Top sellers
             </Text>
 
             <TouchableOpacity className="flex flex-row gap-1 items-center">
-              <Text className="font-semibold underline">See all</Text>
-              <AntDesign name="right" size={20} color="#333" />
+              <Text className="font-semibold underline dark:text-white">
+                See all
+              </Text>
+              <AntDesign
+                name="right"
+                size={20}
+                color={isDarkMode ? "#fff" : "#333"}
+              />
             </TouchableOpacity>
           </View>
 
@@ -424,10 +437,9 @@ export default function Marketplace() {
             {topSellers.map((seller, index) => (
               <View
                 key={index}
-                className="flex justify-between items-center flex-row py-5 rounded-xl px-3"
+                className="flex justify-between items-center flex-row py-5 rounded-xl px-3 bg-white dark:bg-[#24293e]"
                 style={{
-                  backgroundColor: "#fff",
-                  shadowColor: "#999",
+                  shadowColor: isDarkMode ? "#000" : "#999",
                   shadowOffset: { width: 10, height: 2 },
                   shadowOpacity: 0.3,
                   shadowRadius: 4,
@@ -440,7 +452,7 @@ export default function Marketplace() {
                     className="w-12 h-12 rounded-full"
                   />
                   <View className="flex flex-col items-center justify-start">
-                    <Text className="text-left w-full font-bold text-lg text-gray-800">
+                    <Text className="text-left w-full font-bold text-lg text-gray-800 dark:text-white">
                       {seller.name}
                     </Text>
                     <Text className="text-left w-full font-normal text-xs text-gray-500">
@@ -459,7 +471,7 @@ export default function Marketplace() {
                   </View>
 
                   <View className="flex flex-col justify-start">
-                    <Text className="text-xl font-bold">
+                    <Text className="text-xl font-bold dark:text-white">
                       {seller.totalEarnings} ETH
                     </Text>
                     <Text className="text-left w-full font-normal text-xs text-gray-500">
@@ -472,27 +484,32 @@ export default function Marketplace() {
           </View>
 
           <View className="flex-1 justify-between items-center flex-row w-full mt-10 px-3">
-            <Text className="text-xl font-bold text-gray-800 flex-1">
+            <Text className="text-xl font-bold text-gray-800 dark:text-white flex-1">
               Collections
             </Text>
 
             <TouchableOpacity className="flex flex-row gap-1 items-center">
-              <Text className="font-semibold underline">See all</Text>
-              <AntDesign name="right" size={20} color="#333" />
+              <Text className="font-semibold underline dark:text-white">
+                See all
+              </Text>
+              <AntDesign
+                name="right"
+                size={20}
+                color={isDarkMode ? "#fff" : "#333"}
+              />
             </TouchableOpacity>
           </View>
 
           <ScrollView
-            className="flex-1 bg-white pt-5 px-3"
+            className="flex-1 bg-white pt-5 px-3 dark:bg-[#24293e]"
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
             <View className="flex-1 items-center gap-2 justify-start flex-row overflow-auto p-3 pl-1 pt-0 px-3">
               <View className="w-72 m-3">
                 <View
-                  className="rounded-xl shadow-xl bg-white"
+                  className="rounded-xl shadow-xl bg-white dark:bg-[#24293e]"
                   style={{
-                    backgroundColor: "#fff",
                     shadowColor: "#999",
                     shadowOffset: { width: 10, height: 2 },
                     shadowOpacity: 0.3,
@@ -526,7 +543,7 @@ export default function Marketplace() {
                   </View>
 
                   <View className="p-3 pt-1">
-                    <Text className="mb-2 font-medium text-lg text-gray-800">
+                    <Text className="mb-2 font-medium text-lg text-gray-800 dark:text-white">
                       Bored Ape Yacht Club
                     </Text>
 
@@ -535,7 +552,7 @@ export default function Marketplace() {
                         <Text className="text-gray-500 font-normal text-xs w-full text-center">
                           Total Items
                         </Text>
-                        <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                        <Text className="text-gray-800 dark:text-white text-xl w-full font-semibold text-center">
                           10
                         </Text>
                       </View>
@@ -544,7 +561,7 @@ export default function Marketplace() {
                         <Text className="text-gray-500 font-normal text-xs w-full text-center">
                           Items Sold
                         </Text>
-                        <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                        <Text className="text-gray-800 dark:text-white text-xl w-full font-semibold text-center">
                           34
                         </Text>
                       </View>
@@ -553,7 +570,7 @@ export default function Marketplace() {
                         <Text className="text-gray-500 font-normal text-xs w-full text-center">
                           Total Sales
                         </Text>
-                        <Text className="text-gray-800 text-xl w-full font-semibold text-center">
+                        <Text className="text-gray-800 dark:text-white text-xl w-full font-semibold text-center">
                           0.49 ETH
                         </Text>
                       </View>

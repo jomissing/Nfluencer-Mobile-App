@@ -17,10 +17,12 @@ import { Dropdown } from "react-native-element-dropdown";
 import NFTTab from "../components/NFTTab";
 import CollectionTab from "../components/CollectionTab";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 export default function SearchMarketplace() {
   const navigation = useNavigation();
-
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;
 
@@ -195,15 +197,19 @@ export default function SearchMarketplace() {
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white">
+    <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         {/* Top Bar */}
         <View className="flex-col p-4 pt-0">
           <View className="flex-row items-center justify-start gap-4">
             <TouchableOpacity onPress={() => navigation.goBack("Marketplace")}>
-              <AntDesign name="arrowleft" size={24} color="#333" />
+              <AntDesign
+                name="arrowleft"
+                size={24}
+                color={isDarkMode ? "#fff" : "#333"}
+              />
             </TouchableOpacity>
-            <Text className="text-2xl font-bold text-gray-800">
+            <Text className="text-2xl font-bold text-gray-800 dark:text-white">
               Search Marketplace
             </Text>
           </View>
@@ -211,7 +217,7 @@ export default function SearchMarketplace() {
           <View className="flex flex-row items-center gap-3 mt-1">
             <View className="flex-1 relative">
               <TextInput
-                className=" text-gray-800 text-base font-normal p-3 bg-white border-2 border-gray-300 rounded-xl"
+                className=" text-gray-800 dark:text-white text-base font-normal p-3 bg-white dark:bg-gray-600 border-2 border-gray-300 dark:border-gray-500 rounded-xl"
                 placeholder="Search..."
                 placeholderTextColor="rgb(156 163 175)"
               />
@@ -225,9 +231,13 @@ export default function SearchMarketplace() {
             </View>
             <TouchableOpacity
               onPress={isSidebarOpen ? closeSidebar : openSidebar}
-              className="bg-gray-100 p-4 rounded-xl"
+              className="bg-gray-100 dark:bg-gray-600 p-4 rounded-xl"
             >
-              <Ionicons name="filter-outline" size={24} color="#333" />
+              <Ionicons
+                name="filter-outline"
+                size={24}
+                color={isDarkMode ? "rgb(209 213 219)" : "#333"}
+              />
             </TouchableOpacity>
           </View>
 
@@ -238,7 +248,8 @@ export default function SearchMarketplace() {
             >
               <Text
                 className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
-                  activeTab === "NFTs" && " border-gray-800 text-gray-800"
+                  activeTab === "NFTs" &&
+                  " border-gray-800 text-gray-800 dark:text-white dark:border-gray-600"
                 }`}
               >
                 NFTs
@@ -252,25 +263,12 @@ export default function SearchMarketplace() {
               <Text
                 className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
                   activeTab === "Collections" &&
-                  " border-gray-800 text-gray-800"
+                  " border-gray-800 text-gray-800 dark:text-white dark:border-gray-600"
                 }`}
               >
                 Collections
               </Text>
             </TouchableOpacity>
-
-            {/* <TouchableOpacity
-            className="text-center flex-1 items-center"
-            onPress={() => handleTabChange("Collections")}
-          >
-            <Text
-              className={`font-semibold border-b-2 text-center pb-1 w-full text-gray-400 border-transparent ${
-                activeTab === "Creators" && " border-gray-800 text-gray-800"
-              }`}
-            >
-              Creators
-            </Text>
-          </TouchableOpacity> */}
           </View>
         </View>
 
@@ -430,7 +428,11 @@ export default function SearchMarketplace() {
         </Animated.ScrollView>
 
         <ScrollView className="px-3">
-          {activeTab === "NFTs" ? <NFTTab /> : <CollectionTab />}
+          {activeTab === "NFTs" ? (
+            <NFTTab isDarkMode={isDarkMode} />
+          ) : (
+            <CollectionTab isDarkMode={isDarkMode} />
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>

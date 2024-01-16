@@ -3,6 +3,7 @@ import { View } from "react-native";
 import StackNavigator from "./components/StackNavigator";
 import SplashScreen from "./components/SplashScreen";
 import { AuthProvider } from "./pages/redux/AuthContext"; // Adjust the path accordingly
+import { DarkModeProvider } from "./pages/redux/DarkModeContext"; // Adjust the path accordingly
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +22,9 @@ export default function App() {
         </>
       ) : (
         <AuthProvider>
-          <StackNavigator />
+          <DarkModeProvider>
+            <StackNavigator />
+          </DarkModeProvider>
         </AuthProvider>
       )}
     </View>

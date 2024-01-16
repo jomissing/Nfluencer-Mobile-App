@@ -9,10 +9,8 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-// import {ArrowLeftIcon} from 'react-native-heroicons/solid';
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { useAuth } from "./redux/AuthContext";

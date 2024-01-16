@@ -1,23 +1,19 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../pages/Home";
-import {
-  AntDesign,
-  Feather,
-  MaterialCommunityIcons,
-  FontAwesome5,
-  FontAwesome,
-  MaterialIcons,
-  Ionicons,
-} from "@expo/vector-icons";
+import { Feather, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import Inbox from "../pages/Inbox";
 import Marketplace from "../pages/Marketplace";
 import SearchServices from "../pages/Services";
 import MyGigs from "./MyGigs";
+import Settings from "../pages/Settings";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   return (
     // <NavigationContainer>
     <Tab.Navigator
@@ -27,7 +23,7 @@ const TabNavigator = () => {
           paddingHorizontal: 0,
           paddingTop: 0,
           paddingBottom: 0,
-          backgroundColor: "#fff",
+          backgroundColor: isDarkMode ? "#24293e" : "#fff",
           height: 50,
           margin: 0,
           borderTopWidth: 0,
@@ -40,9 +36,13 @@ const TabNavigator = () => {
           // display: "none",
         },
         // tabBarLabel: "",
-        tabBarActiveBackgroundColor: "rgba(226,221,251,0.3)",
+        tabBarActiveBackgroundColor: isDarkMode
+          ? "rgba(226,221,251,0.1)"
+          : "rgba(226,221,251,0.3)",
         tabBarActiveTintColor: "rgb(120,82,243)",
-        tabBarInactiveTintColor: "#7D7C7B",
+        tabBarInactiveTintColor: isDarkMode
+          ? "rgba(96, 101, 122, 1)"
+          : "#7D7C7B",
         tabBarShowLabel: false,
       }}
     >
@@ -51,7 +51,7 @@ const TabNavigator = () => {
         component={Home}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="home" size={size} color={color} />
+            <Feather name="home" size={size} color={color} />
           ),
         }}
       />
@@ -69,7 +69,7 @@ const TabNavigator = () => {
         component={Marketplace}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="diamond" size={size} color={color} />
+            <Ionicons name="cube-outline" size={size} color={color} />
           ),
         }}
       />
@@ -78,9 +78,9 @@ const TabNavigator = () => {
         component={Inbox}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="email-outline"
-              size={28}
+            <Ionicons
+              name="chatbubble-ellipses-outline"
+              size={size}
               color={color}
             />
           ),
@@ -95,8 +95,16 @@ const TabNavigator = () => {
           ),
         }}
       />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="settings-outline" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
-    // </NavigationContainer>
   );
 };
 

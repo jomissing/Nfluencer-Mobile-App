@@ -8,6 +8,7 @@ import EarningsChart from "../components/EarningsChart";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 function Home() {
   const { userDetails, setUserDetails, clearUserDetails } = useAuth();
@@ -26,6 +27,7 @@ function Home() {
   const [totalOrdersLastMonth, setTotalOrdersLastMonth] = useState(0);
   const [overviewOrders, setOverviewOrders] = useState([]);
   const [earningOverview, setearningOverview] = useState([]);
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const topSellers = [
     {
@@ -211,11 +213,11 @@ function Home() {
     );
   }
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View className="flex-1 bg-white">
+    <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
+      <View className="flex-1 bg-white dark:bg-[#24293e]">
         {/* Top Bar */}
         <View className="flex-row justify-between items-center p-4 pt-0">
-          <Text className="text-2xl font-bold text-gray-800">
+          <Text className="text-2xl font-bold text-gray-800 dark:text-white">
             {userDetails["name"]}
           </Text>
           <Image
@@ -231,7 +233,7 @@ function Home() {
                 <View
                   className="bg-nft-primary-light rounded-xl m-2 items-center flex-1"
                   style={{
-                    shadowColor: "#999",
+                    shadowColor: isDarkMode ? "#000" : "#999",
                     shadowOffset: { width: 10, height: 2 },
                     shadowOpacity: 0.3,
                     shadowRadius: 4,
@@ -327,7 +329,7 @@ function Home() {
             </View>
 
             <View className="mt-8">
-              <Text className="text-lg font-bold text-gray-800 mb-3">
+              <Text className="text-lg font-bold text-gray-800 dark:text-white mb-3">
                 Recent Orders
               </Text>
 
@@ -337,8 +339,8 @@ function Home() {
                     key={index}
                     className="flex justify-between items-center flex-row py-5 rounded-xl px-3"
                     style={{
-                      backgroundColor: "#fff",
-                      shadowColor: "#999",
+                      backgroundColor: isDarkMode ? "#24293e" : "#fff",
+                      shadowColor: isDarkMode ? "#000" : "#999",
                       shadowOffset: { width: 10, height: 2 },
                       shadowOpacity: 0.3,
                       shadowRadius: 4,
@@ -353,7 +355,7 @@ function Home() {
                         className="w-12 h-12 rounded-full"
                       />
                       <View className="flex flex-col items-center justify-start">
-                        <Text className="text-left w-full font-bold text-lg text-gray-800">
+                        <Text className="text-left w-full font-bold text-lg text-gray-800 dark:text-white">
                           {order["gig"]["title"].substring(0, 10)}...
                         </Text>
                         <Text className="text-left w-full font-normal text-xs text-gray-500">
@@ -378,10 +380,15 @@ function Home() {
             </View>
 
             <View className="mt-8">
-              <Text className="text-lg font-bold text-gray-800 mb-3">
+              <Text className="text-lg font-bold text-gray-800 dark:text-white mb-3">
                 Earnings Overview
               </Text>
-              {earningseries && <EarningsChart chartData={earningseries} />}
+              {earningseries && (
+                <EarningsChart
+                  chartData={earningseries}
+                  isDarkMode={isDarkMode}
+                />
+              )}
 
               <View className="flex flex-col gap-y-3 px-0 mt-1">
                 {earningOverview.map((order, index) => (
@@ -405,7 +412,7 @@ function Home() {
                         className="w-12 h-12 rounded-full"
                       />
                       <View className="flex flex-col items-center justify-start">
-                        <Text className="text-left w-full font-bold text-lg text-gray-800">
+                        <Text className="text-left w-full font-bold text-lg text-gray-800 dark:text-white">
                           {order["gig"]["title"].substring(0, 10)}...
                         </Text>
                         <Text className="text-left w-full font-normal text-xs text-gray-500">
