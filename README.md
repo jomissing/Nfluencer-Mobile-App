@@ -32,7 +32,7 @@ eas build --platform android
   <img src="assets/mockups/IMG-20240117-WA0003.jpg" alt="Screenshot 4" width="200" height="auto">
   <img src="assets/mockups/IMG-20240117-WA0004.jpg" alt="Screenshot 4" width="200" height="auto">
   <img src="assets/mockups/IMG-20240117-WA0005.jpg" alt="Screenshot 4" width="200" height="auto">
-  <img src="assets/mockups/IMG-20240117-WA0006.jpg" alt="Screenshot 4" width="200" height="auto">
+  <img src="assets/mockups/IMG-20240117-WA0002.jpg" alt="Screenshot 4" width="200" height="auto">
   <img src="assets/mockups/searchmarket.jpeg" alt="Screenshot 4" width="200" height="auto">
   <img src="assets/mockups/market.jpeg" alt="Screenshot 4" width="200" height="auto">
   <img src="assets/mockups/details.jpeg" alt="Screenshot 4" width="200" height="auto">
