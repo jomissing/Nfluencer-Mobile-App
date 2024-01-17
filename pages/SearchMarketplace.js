@@ -196,6 +196,8 @@ export default function SearchMarketplace() {
     },
   ];
 
+  const [mediaType, setMediaType] = useState("Image");
+
   return (
     <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
       <View className="flex-1 bg-white dark:bg-[#24293e]">
@@ -380,7 +382,8 @@ export default function SearchMarketplace() {
                     <View className="relative flex-1">
                       <TextInput
                         type="number"
-                        className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
+                        className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+                        placeholderTextColor={isDarkMode ? "#ccc" : "#333"}
                         placeholder="Min"
                         min={0}
                       />
@@ -391,7 +394,8 @@ export default function SearchMarketplace() {
                     <View className="relative flex-1">
                       <TextInput
                         type="number"
-                        className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center"
+                        className="w-full outline-none text-base placeholder:text-[rgb(156 163 175)] placeholder:font-light font-normal p-3 py-2.5 focus:ring-2 focus:ring-nft-primary-light focus:bg-white border-gray-300 border-2 rounded-xl bg-white text-center dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+                        placeholderTextColor={isDarkMode ? "#ccc" : "#333"}
                         placeholder="Max"
                         min={0}
                       />
@@ -407,18 +411,48 @@ export default function SearchMarketplace() {
                   </View>
 
                   <View className="flex gap-2 items-center justify-between flex-row">
-                    <TouchableOpacity type="number" className="flex-1">
-                      <Text className="text-gray-800 dark:text-white text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                    <TouchableOpacity
+                      type="number"
+                      className="flex-1"
+                      onPress={() => setMediaType("All")}
+                    >
+                      <Text
+                        className={`text-center font-medium p-3.5 border-2 rounded-xl ${
+                          mediaType === "All"
+                            ? "text-white border-nft-primary-light bg-nft-primary-light"
+                            : "text-gray-800 dark:text-white border-gray-300 dark:border-gray-500"
+                        }`}
+                      >
                         All
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity type="number" className="flex-1">
-                      <Text className="text-white text-center font-medium p-3.5 border-nft-primary-light bg-nft-primary-light border-2 rounded-xl">
+                    <TouchableOpacity
+                      type="number"
+                      className="flex-1"
+                      onPress={() => setMediaType("Image")}
+                    >
+                      <Text
+                        className={`text-center font-medium p-3.5 border-2 rounded-xl ${
+                          mediaType === "Image"
+                            ? "text-white border-nft-primary-light bg-nft-primary-light"
+                            : "text-gray-800 dark:text-white border-gray-300 dark:border-gray-500"
+                        }`}
+                      >
                         Image
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity type="number" className="flex-1">
-                      <Text className="text-gray-800 dark:text-white text-center font-medium p-3.5 border-gray-300 border-2 rounded-xl">
+                    <TouchableOpacity
+                      type="number"
+                      className="flex-1"
+                      onPress={() => setMediaType("Video")}
+                    >
+                      <Text
+                        className={`text-center font-medium p-3.5 border-2 rounded-xl ${
+                          mediaType === "Video"
+                            ? "text-white border-nft-primary-light bg-nft-primary-light"
+                            : "text-gray-800 dark:text-white border-gray-300 dark:border-gray-500"
+                        }`}
+                      >
                         Video
                       </Text>
                     </TouchableOpacity>

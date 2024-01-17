@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
-import { Text, View, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Linking,
+} from "react-native";
 import {
   Feather,
   AntDesign,
@@ -13,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import PriceHistory from "../components/PriceHistory";
 import { useDarkMode } from "../pages/redux/DarkModeContext";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Alert } from "react-native";
 
 export default function NFTDetail() {
   const navigation = useNavigation();
@@ -20,9 +28,9 @@ export default function NFTDetail() {
 
   const featuredNFTs = [
     {
-      name: "NFT Name Here",
+      name: "Empire is here",
       price: 0.49,
-      image: require("../assets/nfts/nft1.webp"),
+      image: require("../assets/nfts/nft2.jpg"),
       category: "Gaming",
       collection: {
         name: "Mutants",
@@ -65,6 +73,53 @@ export default function NFTDetail() {
         },
       ],
     },
+    {
+      name: "Magistical Horses NFT",
+      price: 0.49,
+      image: require("../assets/nfts/gaming.webp"),
+      category: "Gaming",
+      collection: {
+        name: "Mutants",
+        items: 10,
+      },
+      likes: 0,
+      creator: {
+        name: "John",
+        username: "@johndoe",
+        address: "0x00...uj09",
+        image: require("../assets/nfts/creator.jpg"),
+      },
+      currentOwner: {
+        name: "Owner",
+        username: "@Owner",
+        address: "0x00...uj09",
+        // image: require("../assets/nfts/owner.jpg"),
+      },
+      ownershipHistory: [
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/art.webp"),
+          date: "12/12/2021",
+        },
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/music.webp"),
+          date: "12/12/2021",
+        },
+        {
+          name: "Owner",
+          username: "@Owner",
+          address: "0x00...uj09",
+          image: require("../assets/nfts/pfps.webp"),
+          date: "12/12/2021",
+        },
+      ],
+    },
+
     {
       name: "NFT Name Here",
       price: 0.49,
@@ -111,53 +166,27 @@ export default function NFTDetail() {
         },
       ],
     },
-    {
-      name: "NFT Name Here",
-      price: 0.49,
-      image: require("../assets/nfts/gaming.webp"),
-      category: "Gaming",
-      collection: {
-        name: "Mutants",
-        items: 10,
-      },
-      likes: 0,
-      creator: {
-        name: "John",
-        username: "@johndoe",
-        address: "0x00...uj09",
-        image: require("../assets/nfts/creator.jpg"),
-      },
-      currentOwner: {
-        name: "Owner",
-        username: "@Owner",
-        address: "0x00...uj09",
-        // image: require("../assets/nfts/owner.jpg"),
-      },
-      ownershipHistory: [
+  ];
+
+  const handleSaveItem = () => {
+    // show alert that its coming soon
+    Alert.alert(
+      "Coming Soon",
+      "This feature is coming soon. Stay tuned!",
+      [
         {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/art.webp"),
-          date: "12/12/2021",
-        },
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/music.webp"),
-          date: "12/12/2021",
-        },
-        {
-          name: "Owner",
-          username: "@Owner",
-          address: "0x00...uj09",
-          image: require("../assets/nfts/pfps.webp"),
-          date: "12/12/2021",
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
         },
       ],
-    },
-  ];
+      { cancelable: false }
+    );
+  };
+
+  const handleLinkPress = (url) => {
+    const externalLink = url;
+    Linking.openURL(externalLink);
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
@@ -691,7 +720,10 @@ export default function NFTDetail() {
                         </View>
 
                         <View className="w-full mt-4 flex items-center flex-row gap-x-2">
-                          <TouchableOpacity className="flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded-xl p-2 py-3 flex-1">
+                          <TouchableOpacity
+                            className="flex items-center justify-center bg-gray-200 dark:bg-gray-600 rounded-xl p-2 py-3 flex-1"
+                            onPress={handleSaveItem}
+                          >
                             <Text className="text-gray-500 dark:text-gray-400 text-base font-semibold">
                               Save Item
                             </Text>
@@ -715,14 +747,22 @@ export default function NFTDetail() {
         </ScrollView>
 
         <View className="flex-1 gap-2 p-2 pt-0 absolute bg-white bottom-0 flex-row border-t border-gray-100 dark:bg-[#24293e] dark:border-gray-600">
-          <TouchableOpacity className="bg-nft-primary rounded-lg p-3 flex-1 bg-nft-primary-light space-x-2 flex-row items-center justify-center">
+          <TouchableOpacity
+            className="bg-nft-primary rounded-lg p-3 flex-1 bg-nft-primary-light space-x-2 flex-row items-center justify-center"
+            onPress={() =>
+              handleLinkPress("https://nfluencer-website.vercel.app")
+            }
+          >
             <Feather name="shopping-cart" size={24} color="white" />
             <Text className="text-white font-semibold text-center text-base">
               Buy Now
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity className="bg-nft-primary rounded-lg p-3 flex-1 bg-nft-primary-transparent flex-row items-center justify-center space-x-2">
+          <TouchableOpacity
+            className="bg-nft-primary rounded-lg p-3 flex-1 bg-nft-primary-transparent flex-row items-center justify-center space-x-2"
+            onPress={handleSaveItem}
+          >
             <Feather name="bookmark" size={24} color="rgb(120 82 243)" />
             <Text className="text-nft-primary-light font-semibold text-center text-base">
               Save Item

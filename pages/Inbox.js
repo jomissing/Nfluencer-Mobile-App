@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -59,6 +60,21 @@ export default function Inbox() {
     navigation.navigate("Chat", { user });
   };
 
+  const handleComingSoon = () => {
+    // show alert that its coming soon
+    Alert.alert(
+      "Coming Soon",
+      "This feature is coming soon. Stay tuned!",
+      [
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }} className="bg-white dark:bg-[#24293e]">
       <View className="flex-1 bg-white dark:bg-[#24293e]">
@@ -67,7 +83,7 @@ export default function Inbox() {
           <Text className="text-2xl font-bold text-gray-800 dark:text-white">
             Inbox
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleComingSoon}>
             <AntDesign
               name="filter"
               size={24}

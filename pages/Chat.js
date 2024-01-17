@@ -16,6 +16,7 @@ import Constants from "expo-constants";
 import { useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDarkMode } from "../pages/redux/DarkModeContext";
+import { Alert } from "react-native";
 
 const messagesData = [
   {
@@ -262,6 +263,21 @@ export default function Chat() {
     return formattedDate;
   }
 
+  const handleComingSoon = () => {
+    // show alert that its coming soon
+    Alert.alert(
+      "Coming Soon",
+      "This feature is coming soon. Stay tuned!",
+      [
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1 }}
@@ -286,7 +302,7 @@ export default function Chat() {
           </View>
 
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleComingSoon}>
               <Feather name="more-vertical" size={24} color="#fff" />
             </TouchableOpacity>
           </View>

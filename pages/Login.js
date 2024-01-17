@@ -14,7 +14,6 @@ import { useNavigation } from "@react-navigation/native";
 // import { APP_API_URL } from "@env";
 import Constants from "expo-constants";
 import { useAuth } from "./redux/AuthContext";
-import { useDarkMode } from "../pages/redux/DarkModeContext";
 
 export default function Login() {
   const APP_API_URL = Constants.manifest.extra.APP_API_URL;
@@ -26,7 +25,6 @@ export default function Login() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { userDetails, setUserDetails, clearUserDetails } = useAuth();
   const navigation = useNavigation();
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   // clear all states on unmount
   useEffect(() => {
@@ -41,11 +39,11 @@ export default function Login() {
   }, []);
 
   // redirect to main if user is already logged in
-  // useEffect(() => {
-  //   if (userDetails) {
-  //     navigation.navigate("Main");
-  //   }
-  // }, [userDetails]);
+  useEffect(() => {
+    if (userDetails) {
+      navigation.navigate("Main");
+    }
+  }, [userDetails]);
 
   const handeLogin = async () => {
     setIsSubmitting(true);
